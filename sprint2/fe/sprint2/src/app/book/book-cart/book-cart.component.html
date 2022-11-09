@@ -1,0 +1,165 @@
+<div class="content">
+  <div class="breadcrumb-container">
+    <div class="container">
+      <ul class="breadcrumb pull-left">
+        <li><a href="home.html">Trang chủ</a></li>
+        <li><a href="category.html">Sách</a></li>
+        <li class="active">Giỏ hàng của tôi</li>
+      </ul><!-- /.breadcrumb -->
+
+      <!-- ========================================= BREADCRUMB SEARCH BOX ========================================= -->
+      <ul class="list-unstyled search-box pull-right">
+        <li data-target="#search" data-toggle="sub-header">
+          <button type="button" class="btn btn-primary-dark search-button"><i class="fa fa-search icon"></i></button>
+          <div class="row search-action sub-header" id="search">
+            <div class="col-sm-8 col-xs-12 no-padding-right">
+              <div class="input-group">
+                <span class="input-group-btn"><button class="btn btn-search" type="button"><i
+                  class="fa fa-search icon"></i></button></span>
+                <input type="text" class="form-control search-book" placeholder="Search books...">
+              </div><!-- /.input-group -->
+            </div><!-- /.col -->
+
+            <div class="col-sm-4 col-xs-12 select-wrapper" style="padding:0px;">
+              <select id="id_select" class="selectpicker">
+                <option selected>Thể loại</option>
+                <option>Books</option>
+                <option>Textbooks</option>
+                <option>Audiobooks</option>
+                <option>Magazines</option>
+                <option>Kids</option>
+              </select>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+        </li>
+      </ul><!-- /.search-box -->
+      <!-- ========================================= BREADCRUMB SEARCH BOX : END ========================================= -->
+
+    </div><!-- /.container -->
+  </div><!-- /.breadcrumb-container -->
+
+  <div class="cart page">
+    <div class="container">
+      <div class="page-header">
+        <h2 class="page-title">Giỏ hàng của tôi</h2>
+      </div><!-- /.page-header -->
+
+      <form class="page-body">
+        <div class="order-detail table-responsive">
+          <table class="table table-cart cart-detail ">
+            <thead>
+            <tr>
+              <th class="dark"><input type="checkbox" style="margin: 0;">&nbsp;&nbsp;Sản phẩm</th>
+              <th>Đơn giá</th>
+              <th class="dark text-center">Số lượng</th>
+              <th>Số tiền</th>
+              <th class="dark"></th>
+            </tr>
+            </thead><!-- /thead -->
+            <tbody class="cart-body-content">
+            <tr class="cart-book">
+              <td>
+                <input type="checkbox" style="margin: 0;">
+                <div class="media">
+                  <a href="detail.html" class="cart-thumbnail-image media-left">
+                    <div class="book-cover small-book-cover">
+                      <img src="assets/images/books/small-image1.jpg" alt="" class="media-object">
+                      <div class="fade"></div>
+                    </div>
+                  </a>
+                  <div class="media-body">
+                    <h3 class="media-heading"><a href="detail.html">Adipisicing</a></h3>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <span class="price">$9.99</span>
+              </td>
+              <td class="quantity text-center">
+                <div class="quant-input ">
+                  <div class="arrows">
+                    <div class="arrow plus gradient"><span class="ir"></span></div>
+                    <div class="arrow minus gradient"><span class="ir"></span></div>
+                  </div>
+                  <input class="txt-quantity" type="text" value="2"/>
+                </div>
+              </td>
+              <td>
+                <span class="price subtotal">$9.99</span>
+              </td>
+              <td>
+                <button class="btn btn-primary-light btn-flat" type="button">X</button>
+              </td>
+            </tr>
+
+            <tr class="cart-book">
+              <td>
+                <input type="checkbox" style="margin: 0;">
+                <div class="media">
+                  <a href="detail.html" class="cart-thumbnail-image media-left">
+                    <div class="book-cover small-book-cover">
+                      <img src="assets/images/books/small-image2.jpg" alt="" class="media-object">
+                      <div class="fade"></div>
+                    </div>
+                  </a>
+                  <div class="media-body">
+                    <h3 class="media-heading"><a href="detail.html">Adipisicing</a></h3>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <span class="price">$9.99</span>
+              </td>
+              <td class="quantity text-center">
+                <div class="quant-input ">
+                  <div class="arrows">
+                    <div class="arrow plus gradient"><span class="ir"></span></div>
+                    <div class="arrow minus gradient"><span class="ir"></span></div>
+                  </div>
+                  <input class="txt-quantity" type="text" value="2"/>
+                </div>
+              </td>
+              <td>
+                <span class="price subtotal">$9.99</span>
+              </td>
+              <td>
+                <button class="btn btn-primary-light btn-flat" type="button">X</button>
+              </td>
+            </tr>
+            </tbody><!-- /.cart-body-content -->
+          </table><!-- /.table -->
+        </div><!-- /.order-detail -->
+        <div class="row">
+
+          <div class="col-xs-12 col-sm-4 center-sm">
+            <input type="text" class="form-control discount-name" placeholder="Nhập phiếu giảm giá của bạn...">
+          </div><!-- /.col -->
+
+          <div class="col-xs-12 col-sm-8 center-sm">
+            <div class="table-responsive">
+              <table class="table table-cart">
+                <tfoot>
+                <!--                <tr>-->
+                <!--                  <td ><i class="icon-chevron fa fa-chevron-right"></i>&nbsp;Tổng tiền</td>-->
+                <!--                  <td >$ 20.00</td>-->
+                <!--                </tr>-->
+
+                <tr>
+                  <td><i class="icon-chevron fa fa-chevron-right"></i>&nbsp;Tổng tiền</td>
+                  <td>$ 20.00</td>
+                </tr>
+                </tfoot><!-- /tfoot -->
+              </table><!-- /table -->
+            </div><!-- /table-responsive -->
+          </div><!-- /.col -->
+          <div class="col-md-12">
+            <a href="checkout.html" class="pull-right btn btn-primary btn-checkout">Tiến hành thanh toán &nbsp;<i
+              class="fa fa-chevron-right"></i></a>
+          </div>
+
+        </div><!-- /.row -->
+      </form><!-- /.page-body -->
+    </div><!-- /.container -->
+  </div><!-- /.cart page --> <a class="scrollup hidden-xs hidden-sm" href="#" style="display: none;"><img
+  src="assets/images/top-scroll.png" alt=""></a>
+</div>
