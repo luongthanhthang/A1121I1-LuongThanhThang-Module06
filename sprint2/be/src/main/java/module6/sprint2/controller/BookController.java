@@ -6,9 +6,6 @@ import module6.sprint2.service.IBookService;
 import module6.sprint2.service.ICategoryService;
 import module6.sprint2.service.IPromotionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -36,13 +33,34 @@ public class BookController {
     IPromotionService promotionService;
 
 //    @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_CUSTOMER')")
-    @GetMapping("book-list")
-    public ResponseEntity<List<Book>> findAllBook() {
-        List<Book> bookList = bookService.findAllBook();
+    @GetMapping("/book-customer/no-login/book-list-intro")
+    public ResponseEntity<List<Book>> findAllBookIntro() {
+        List<Book> bookList = bookService.findAllBookIntro();
         if (bookList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             return new ResponseEntity<>(bookList, HttpStatus.OK);
         }
     }
+
+    @GetMapping("/book-customer/no-login/book-list-best-seller-intro")
+    public ResponseEntity<List<Book>> findAllBookBestSellerIntro() {
+        List<Book> bookList = bookService.findAllBookBestSellerIntro();
+        if (bookList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(bookList, HttpStatus.OK);
+        }
+    }
+
+    @GetMapping("/book-customer/no-login/book-list-best-seller")
+    public ResponseEntity<List<Book>> findAllBookBestSeller() {
+        List<Book> bookList = bookService.findAllBookBestSeller();
+        if (bookList.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(bookList, HttpStatus.OK);
+        }
+    }
+
 }

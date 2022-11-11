@@ -15,7 +15,17 @@ public class BookServiceImpl implements IBookService {
 
 
     @Override
-    public List<Book> findAllBook() {
-        return bookRepository.findAll();
+    public List<Book> findAllBookIntro() {
+        return bookRepository.findAllBookIntro();
+    }
+
+    @Override
+    public List<Book> findAllBookBestSellerIntro() {
+        return bookRepository.findAllBookBestSellerIntro();
+    }
+
+    @Override
+    public List<Book> findAllBookBestSeller() {
+        return bookRepository.findAllBookBestSeller();
     }
 }

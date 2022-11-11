@@ -62,7 +62,8 @@
               </h4>
             </div><!-- /.panel-heading -->
 
-            <form id="collapseOne" class="panel-collapse collapse in" style="margin-top: 50px">
+            <form id="collapseOne" class="panel-collapse collapse in" style="margin-top: 50px" [formGroup]="loginForm"
+                  (ngSubmit)="login()">
               <div class="panel-body">
                 <div class="row">
 
@@ -92,9 +93,14 @@
                                                 <span class="input-group-addon input-group-addon-book">
                                                     <i class="fa fa-user fa-fw"></i>
                                                 </span>
-                      <input class="form-control form-control-book" type="text" placeholder="Tài khoản đăng nhập">
+                      <input class="form-control form-control-book" type="text" placeholder="Tài khoản đăng nhập" formControlName="username">
+
                     </div><!-- /.input-group -->
                     <small style="color:white;">-</small>
+                    <small class="text-danger mb-0 pb-0"
+                           *ngIf="loginForm.get('username').invalid && (loginForm.get('username').touched||loginForm.get('username').dirty)">
+                      Người thực hiện không được để trống
+                    </small>
 
 
                     <div class="row">
@@ -103,7 +109,8 @@
                                                         <span class="input-group-addon input-group-addon-book">
                                                             <i class="fa fa-key fa-fw"></i>
                                                         </span>
-                          <input class="form-control form-control-book" type="password" placeholder="*******"/>
+                          <input class="form-control form-control-book" type="password" placeholder="*******"
+                                 formControlName="password"/>
                         </div><!-- /.input-group -->
                       </div><!-- /.col -->
 
@@ -112,12 +119,17 @@
                       </div><!-- /.col -->
                     </div><!-- /.row -->
                     <small style="color:white;">-</small>
+                    <small class="text-danger mb-0 pb-0"
+                           *ngIf="loginForm.get('password').invalid && (loginForm.get('password').touched||loginForm.get('password').dirty)">
+                      Mật khẩu không được để trống
+                    </small>
 
 
                     <div class="checkout-checkbox-option">
-                      <input type="checkbox" class="book-radio" name="optionsRadios" id="optionsRadios" value="option2">
+                      <input type="checkbox" class="book-radio" name="optionsRadios" id="optionsRadios" value="option2"
+                             formControlName="remember_me">
                       <label class="book-radio-label" for="optionsRadios">
-                        <span class="radio-background"><i class="icon fa fa-circle"></i></span>Remember me
+                        <span class="radio-background"><i class="icon fa fa-circle"></i></span>Ghi nhớ mật khẩu
                       </label>
                     </div><!-- /.checkout-checkbox-option -->
 
@@ -125,10 +137,10 @@
                   <div class="col-sm-3"></div>
 
                   <div class="col-md-12">
-                    <a href="cart.html" class="pull-right btn btn-primary btn-checkout">
+                    <button type="submit" class="pull-right btn btn-primary btn-checkout">
                       Đăng nhập
                       <i class="fa fa-chevron-right"></i>
-                    </a>
+                    </button>
                   </div>
                 </div><!-- /.row -->
               </div><!-- /.panel-body -->
@@ -150,10 +162,12 @@
             </div><!-- /.panel-heading -->
 
             <!--            =====================Đăng kí================-->
-            <form id="collapseTwo" class="panel-collapse collapse" style="margin-top: 50px">
+
+            <div id="collapseTwo" class="panel-collapse collapse" style="margin-top: 50px">
               <div class="panel-body">
                 <div class="form-container">
-                  <form class="cnt-form" role="form">
+                  <!--            ==form==-->
+                  <div class="cnt-form" role="form">
                     <div class="row field-row form-group">
                       <div class="col-xs-12 col-sm-6">
                         <label>
@@ -269,16 +283,16 @@
                     </div><!-- /.row -->
 
 
-<!--                    <div class="row field-row form-group">-->
-<!--                      <div id="create-account" class="col-xs-12">-->
-<!--                        <label>-->
-<!--                          <input type="checkbox">-->
-<!--                          Tạo tài khoản?-->
-<!--                        </label>-->
-<!--                        - Bạn sẽ nhận được email xác thực.-->
-<!--                      </div>&lt;!&ndash; /.col &ndash;&gt;-->
-<!--                    </div>&lt;!&ndash; /.row &ndash;&gt;-->
-                  </form><!-- /.cnt-form -->
+                    <!--                    <div class="row field-row form-group">-->
+                    <!--                      <div id="create-account" class="col-xs-12">-->
+                    <!--                        <label>-->
+                    <!--                          <input type="checkbox">-->
+                    <!--                          Tạo tài khoản?-->
+                    <!--                        </label>-->
+                    <!--                        - Bạn sẽ nhận được email xác thực.-->
+                    <!--                      </div>&lt;!&ndash; /.col &ndash;&gt;-->
+                    <!--                    </div>&lt;!&ndash; /.row &ndash;&gt;-->
+                  </div><!-- /.cnt-form -->
                 </div><!-- /.form-container -->
               </div><!-- /.panel-body -->
 
@@ -288,7 +302,7 @@
                   <i class="fa fa-chevron-right"></i>
                 </button>
               </div>
-            </form><!-- /.panel-collapse -->
+            </div><!-- /.panel-collapse -->
           </div><!-- /.panel -->
 
           <!--          <div class="panel panel-default">-->

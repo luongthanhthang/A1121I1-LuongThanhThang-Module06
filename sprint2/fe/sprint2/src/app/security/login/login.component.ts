@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {TokenStorageService} from "../../service/security/token-storage.service";
 import {SecurityServiceService} from "../../service/security/security-service.service";
 import {Router} from "@angular/router";
@@ -12,7 +12,7 @@ import {HeaderComponent} from "../../layout/header/header.component";
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  urlCustomer: any;
+  urlCustomer: any = null;
   upLoadImageCustomer = null;
   @ViewChild('avatarCustomer')
   myInputVariableCustomer: ElementRef;
@@ -39,11 +39,12 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
-      password: ['', Validators.required],
-      remember_me: false
+    this.loginForm = new FormGroup({
+      username: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
+      remember_me: new FormControl(false)
     });
+
     if (this.tokenStorageService.getUser()) {
       this.securityService.isLoggedIn = true;
       this.role = this.tokenStorageService.getUser().roles[0].roleName;
@@ -54,13 +55,11 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    console.log(this.loginForm.value.username);
     this.securityService.login(this.loginForm.value).subscribe(data => {
-        console.log(data);
-        if (this.loginForm.value.remember_me === true) {
+        if (this.loginForm.get('remember_me').value === true) {
           this.tokenStorageService.saveUserLocal(data);
           this.tokenStorageService.saveTokenLocal(data.jwtToken);
-        } else if (this.loginForm.value.remember_me === false) {
+        } else if (this.loginForm.get('remember_me').value === false) {
           this.tokenStorageService.saveUserSession(data);
           this.tokenStorageService.saveTokenSession(data.jwtToken);
           // this.username = this.loginFrom.controls.username.value;
@@ -69,10 +68,10 @@ export class LoginComponent implements OnInit {
         this.isLoggedIn = true;
         this.username = this.tokenStorageService.getUser().account.username;
         this.role = this.tokenStorageService.getUser().account.roles.roleName;
-        console.log('username: ' + this.tokenStorageService.getUser().account.username);
-        console.log('role: ' + this.tokenStorageService.getUser().account.roles[0].roleName);
-        console.log('token: ' + this.tokenStorageService.getUser().jwtToken);
-        console.log('token: ' + this.tokenStorageService.getUser().account.accountId);
+        // console.log('username: ' + this.tokenStorageService.getUser().account.username);
+        // console.log('role: ' + this.tokenStorageService.getUser().account.roles[0].roleName);
+        // console.log('token: ' + this.tokenStorageService.getUser().jwtToken);
+        // console.log('token: ' + this.tokenStorageService.getUser().account.accountId);
 
         // this.loginForm.reset();
         // if (this.role.indexOf('ROLE_ADMIN') !== -1) {
@@ -85,15 +84,15 @@ export class LoginComponent implements OnInit {
         // }
       }
       , error => {
-        if (this.loginForm.value.username === '') {
+        if (this.loginForm.get('username').value === '') {
           // this.errorMessage1 = 'Tài khoản không được để trống';
           this.checkUserName = true;
         }
-        if (this.loginForm.value.password === '') {
+        if (this.loginForm.get('password').value === '') {
           // this.errorMessage1 = 'Tài khoản không được để trống';
           this.checkPassWord = true;
         }
-        console.log(error);
+        // console.log(error);
         this.isLoggedIn = false;
         this.errorMessage = 'Tài khoản hoặc mật khẩu không đúng';
       },
