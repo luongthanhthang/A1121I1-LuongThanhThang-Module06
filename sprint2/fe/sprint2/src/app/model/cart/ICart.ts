@@ -1,4 +1,4 @@
-import {IAccount} from "../account/IAccount";
+import {IAccount} from '../account/IAccount';
 
 export interface ICart {
   cartId?: number;

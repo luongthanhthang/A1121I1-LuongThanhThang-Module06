@@ -39,6 +39,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.topFunction();
+
     this.loginForm = new FormGroup({
       username: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
@@ -117,6 +119,11 @@ export class LoginComponent implements OnInit {
       this.idEmployee = null;
     }
     this.isLoggedIn = this.username != null;
+  }
+
+  topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 200;
   }
 
   // +++++firebase++++

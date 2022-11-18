@@ -8,31 +8,31 @@
       </ul><!-- /.breadcrumb -->
 
       <!-- ========================================= BREADCRUMB SEARCH BOX ========================================= -->
-      <ul class="list-unstyled search-box pull-right">
-        <li data-target="#search" data-toggle="sub-header">
-          <button type="button" class="btn btn-primary-dark search-button"><i class="fa fa-search icon"></i></button>
-          <form [formGroup]="formSearch" (ngSubmit)="searchBook()" class="row search-action sub-header" id="search">
-            <div class="col-sm-12 col-xs-12 no-padding-right">
-              <div class="input-group">
-                <span class="input-group-btn"><button class="btn btn-search" type="button"><i
-                  class="fa fa-search icon"></i></button></span>
-                <input type="text" class="form-control search-book" formControlName="nameSearch" placeholder="Tìm kiếm sách...">
-              </div><!-- /.input-group -->
-            </div><!-- /.col -->
-
-<!--            <div class="col-sm-4 col-xs-12 select-wrapper" style="padding:0px;">-->
-<!--              <select id="id_select" class="selectpicker">-->
-<!--                <option selected>Thể loại</option>-->
-<!--                <option>Books</option>-->
-<!--                <option>Textbooks</option>-->
-<!--                <option>Audiobooks</option>-->
-<!--                <option>Magazines</option>-->
-<!--                <option>Kids</option>-->
-<!--              </select>-->
+<!--      <ul class="list-unstyled search-box pull-right">-->
+<!--        <li data-target="#search" data-toggle="sub-header">-->
+<!--          <button type="button" class="btn btn-primary-dark search-button"><i class="fa fa-search icon"></i></button>-->
+<!--          <div class="row search-action sub-header" id="search">-->
+<!--            <div class="col-sm-12 col-xs-12 no-padding-right">-->
+<!--              <div class="input-group">-->
+<!--                <span class="input-group-btn"><button class="btn btn-search" type="button"><i-->
+<!--                  class="fa fa-search icon"></i></button></span>-->
+<!--                <input type="text" class="form-control search-book" placeholder="Tìm kiếm sách...">-->
+<!--              </div>&lt;!&ndash; /.input-group &ndash;&gt;-->
 <!--            </div>&lt;!&ndash; /.col &ndash;&gt;-->
-          </form><!-- /.row -->
-        </li>
-      </ul><!-- /.search-box -->
+
+<!--            &lt;!&ndash;            <div class="col-sm-4 col-xs-12 select-wrapper" style="padding:0px;">&ndash;&gt;-->
+<!--            &lt;!&ndash;              <select id="id_select" class="selectpicker">&ndash;&gt;-->
+<!--            &lt;!&ndash;                <option selected>Thể loại</option>&ndash;&gt;-->
+<!--            &lt;!&ndash;                <option>Books</option>&ndash;&gt;-->
+<!--            &lt;!&ndash;                <option>Textbooks</option>&ndash;&gt;-->
+<!--            &lt;!&ndash;                <option>Audiobooks</option>&ndash;&gt;-->
+<!--            &lt;!&ndash;                <option>Magazines</option>&ndash;&gt;-->
+<!--            &lt;!&ndash;                <option>Kids</option>&ndash;&gt;-->
+<!--            &lt;!&ndash;              </select>&ndash;&gt;-->
+<!--            &lt;!&ndash;            </div>&lt;!&ndash; /.col &ndash;&gt;&ndash;&gt;-->
+<!--          </div>&lt;!&ndash; /.row &ndash;&gt;-->
+<!--        </li>-->
+<!--      </ul>&lt;!&ndash; /.search-box &ndash;&gt;-->
       <!-- ========================================= BREADCRUMB SEARCH BOX : END ========================================= -->
 
     </div><!-- /.container -->
@@ -41,10 +41,7 @@
   <div class="category page">
     <div class="container">
       <div class="page-header category-page-header">
-        <h2 class="page-title" *ngIf="categoryId == ''">NHỮNG CUỐN SÁCH MỚI</h2>
-        <div *ngFor="let category of categoryList">
-          <h2 class="page-title" *ngIf="category.categoryId == categoryId">NHỮNG CUỐN SÁCH {{category.categoryName}}</h2>
-        </div>
+        <h2 class="page-title">NHỮNG CUỐN SÁCH BÁN CHẠY</h2>
       </div><!-- /.page-header -->
 
       <div class="page-body">
@@ -66,13 +63,13 @@
                 </div><!-- /.col -->
 
                 <div class="col-md-4 col-sm-8">
-                  <select class="selectpicker" [(ngModel)]="checkSort" (ngModelChange)="sortBookList(checkSort, 0)">
-                    <option selected="selected" value="">Ngày mới nhất</option>
-                    <option value="price:asc">Giá: thấp nhất cao</option>
-                    <option value="price:desc">Giá: cao nhất thấp</option>
-                    <option value="name:asc">Tên sách: A đến Z</option>
-                    <option value="name:desc">Tên sách: Z đến A</option>
-                  </select>
+<!--                  <select class="selectpicker" [(ngModel)]="checkSort" (ngModelChange)="sortBookList(checkSort, 0)">-->
+<!--                    <option selected="selected" value="">Ngày mới nhất</option>-->
+<!--                    <option value="price:asc">Giá: thấp nhất cao</option>-->
+<!--                    <option value="price:desc">Giá: cao nhất thấp</option>-->
+<!--                    <option value="name:asc">Tên sách: A đến Z</option>-->
+<!--                    <option value="name:desc">Tên sách: Z đến A</option>-->
+<!--                  </select>-->
                 </div><!-- /.col -->
 
 
@@ -240,9 +237,8 @@
 
                 <div class="module-body category-module-body">
                   <ul class="list-unstyled category-list">
-                    <li style="cursor: pointer" class="sub-category-list"><a (click)="findAllBookListCategory(0)">Tất cả</a></li>
                     <li style="cursor: pointer" *ngFor="let category of categoryList"><a
-                      (click)="findAllBookListCategory(0, category.categoryId)">{{category.categoryName}}</a></li>
+                      [routerLink]="['/book/list', category.categoryId]">{{category.categoryName}}</a></li>
                   </ul><!-- /.list-unstyled -->
                 </div><!-- /.module-body -->
               </section><!-- /.module -->

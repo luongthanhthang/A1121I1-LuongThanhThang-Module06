@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import {TokenStorageService} from "../../service/security/token-storage.service";
-import {Router} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {TokenStorageService} from '../../service/security/token-storage.service';
+import {Router} from '@angular/router';
+import {BookService} from '../../service/book.service';
+import {IBook} from '../../model/book/IBook';
+import {ICategory} from '../../model/book/ICategory';
 
 @Component({
   selector: 'app-header',
@@ -14,10 +17,16 @@ export class HeaderComponent implements OnInit {
   showAdminBoard = false;
   showCustomer = false;
   userName: string;
+
+  categoryList: ICategory[] = [];
+
   constructor(private tokenStorageService: TokenStorageService,
-              private router: Router) { }
+              private router: Router,
+              private bookService: BookService) {
+  }
 
   ngOnInit(): void {
+    this.findAllCategory();
     // kiểm tra đăng nhập
     this.isLoggedIn = !!this.tokenStorageService.getToken();
     if (this.isLoggedIn) {
@@ -30,10 +39,17 @@ export class HeaderComponent implements OnInit {
       console.log('roles: ' + this.roles);
     }
   }
+
   logout() {
     this.tokenStorageService.signOut();
     window.location.assign('');
     this.router.navigateByUrl('');
   }
 
+  // =======lấy dữ liệu===========
+  findAllCategory() {
+    this.bookService.findAllCategory().subscribe((data: ICategory[]) => {
+      this.categoryList = data;
+    });
+  }
 }

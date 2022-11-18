@@ -1,5 +1,5 @@
-import {ICart} from "./ICart";
-import {IBook} from "../book/IBook";
+import {ICart} from './ICart';
+import {IBook} from '../book/IBook';
 
 export interface ICartBook {
   cartBookId?: number;

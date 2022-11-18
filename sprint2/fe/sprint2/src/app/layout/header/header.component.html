@@ -42,92 +42,27 @@
           <ul class="nav navbar-nav navbar-right">
             <li class="dropdown yamm-fw active">
               <a routerLink="/book/list" data-toggle="dropdown" data-hover="dropdown"
-                 class="dropdown-toggle trigger">Danh mục sách</a>
-              <ul class="list-unstyled dropdown-menu dropdown-megamenu">
-                <li>
-                  <div class="yamm-content">
-                    <div class="row">
-                      <div class="col-sm-6">
-                        <ul>
-                          <li class="menu-header" role="presentation">
-                            <strong>Customer Favorites</strong>
-                          </li>
-                          <li><a href="category.html">Lorem ipsum</a></li>
-                          <li><a href="category.html">Dolor sit amet</a></li>
-                          <li><a href="category.html">Consectetur adipi</a></li>
-                          <li><a href="category.html">sicing elit</a></li>
-                          <li><a href="category.html">sed do eiusmod</a></li>
-                        </ul>
-                      </div><!-- /.col -->
-                      <div class="col-sm-6">
-                        <ul>
-                          <li class="menu-header" role="presentation">
-                            <strong>Departments</strong>
-                          </li>
-                          <li><a href="category.html">Lorem ipsum</a></li>
-                          <li><a href="category.html">Dolor sit amet</a></li>
-                          <li><a href="category.html">Consectetur adipi</a></li>
-                          <li><a href="category.html">sicing elit</a></li>
-                          <li><a href="category.html">sed do eiusmod</a></li>
-                        </ul>
-                      </div><!-- /.col -->
-
-                      <div class="margin-top col-sm-6">
-                        <ul>
-                          <li class="menu-header" role="presentation">
-                            <strong>Subjects</strong>
-                          </li>
-                          <li><a href="category.html">Lorem ipsum</a></li>
-                          <li><a href="category.html">Dolor sit amet</a></li>
-                          <li><a href="category.html">Consectetur adipi</a></li>
-                          <li><a href="category.html">sicing elit</a></li>
-                          <li><a href="category.html">sed do eiusmod</a></li>
-                        </ul>
-                      </div><!-- /.col -->
-
-                      <div class="margin-top col-sm-6">
-                        <ul>
-                          <li class="menu-header" role="presentation">
-                            <strong>Schools</strong>
-                          </li>
-                          <li><a href="category.html">Lorem ipsum</a></li>
-                          <li><a href="category.html">Dolor sit amet</a></li>
-                          <li><a href="category.html">Consectetur adipi</a></li>
-                          <li><a href="category.html">sicing elit</a></li>
-                          <li><a href="category.html">sed do eiusmod</a></li>
-                        </ul>
-                      </div><!-- /.col -->
-                      <div class="clearfix visible-xs"></div>
-                    </div><!-- /.row -->
-                  </div><!-- /.yamm-content -->
-                </li>
+                 class="dropdown-toggle trigger">Danh mục sách<b class="caret"></b></a>
+              <ul class="dropdown-menu pages-dropdown">
+                <li *ngFor="let category of categoryList"><a
+                  [routerLink]="['/book/list', category.categoryId]">{{category.categoryName}}</a></li>
               </ul><!-- /.dropdown-menu -->
-            </li>
-            <li class="hidden-sm"><a routerLink="">Sách bán chạy</a></li>
+            </li> <!-- /.dropdown -->
+            <li class="hidden-sm"><a routerLink="book/list-best-seller">Sách bán chạy</a></li>
             <li class="hidden-sm"><a routerLink="">Khuyến mãi</a></li>
-            <li><a routerLink="">Giảm giá đặc biệt</a></li>
+            <li><a routerLink="book/list-promotion">Giảm giá đặc biệt</a></li>
             <!--            =======Phân quyền====-->
             <!--            ====chưa login===-->
             <li class="dropdown yamm-fw active" *ngIf="!isLoggedIn"></li>
             <!--            ====đã login===-->
-            <li class="dropdown yamm-fw active" *ngIf="isLoggedIn && showAdminBoard">
-              <a routerLink="/book/list" data-toggle="dropdown" data-hover="dropdown"
-                 class="dropdown-toggle trigger">Chỉnh sửa</a>
-              <ul class="dropdown-menu">
-                <li>
-                  <div class="yamm-content">
-                    <ul style="list-style-type: none;">
-                      <li class="menu-header" role="presentation">
-                        <strong><a style="color: black; text-decoration: none" href="">The</a></strong>
-                        <strong><a style="color: black; text-decoration: none" href="">Customer Favorites</a></strong>
-                        <strong><a style="color: black; text-decoration: none" href="">Customer Favorites</a></strong>
-                        <strong><a style="color: black; text-decoration: none" href="">Customer Favorites</a></strong>
-                      </li>
-                    </ul>
-                  </div><!-- /.col -->
-                </li>
-              </ul><!-- /.dropdown-menu -->
-            </li>
+<!--            <li class="dropdown yamm-fw active" *ngIf="isLoggedIn && showAdminBoard">-->
+<!--              <a routerLink="/book/list" data-toggle="dropdown" data-hover="dropdown"-->
+<!--                 class="dropdown-toggle trigger">Danh mục sách<b class="caret"></b></a>-->
+<!--              <ul class="dropdown-menu pages-dropdown">-->
+<!--                <li *ngFor="let category of categoryList"><a-->
+<!--                  [routerLink]="['/book/list', category.categoryId]">{{category.categoryName}}</a></li>-->
+<!--              </ul>&lt;!&ndash; /.dropdown-menu &ndash;&gt;-->
+<!--            </li>-->
 
             <!--            <li class="dropdown">-->
             <!--              <a href="category.html" data-toggle="dropdown" data-hover="dropdown"-->
@@ -144,7 +79,8 @@
           </ul><!-- /.nav -->
         </div><!-- /.collapse -->
         <!--        ==========Giỏ hàng=========-->
-        <a routerLink="/cart" class="navbar-btn btn btn-cart" data-toggle="collapse"><img
+        <a *ngIf="isLoggedIn && (showAdminBoard||showCustomer)" routerLink="/cart" class="navbar-btn btn btn-cart"
+           data-toggle="collapse"><img
           src="../../../assets/images/shopping-cart.png" alt=""/><span class="badge-cart-items-count">4</span></a>
       </div><!-- /.header-mast -->
       <!-- ============================================================= NAVBAR PRIMARY : END ============================================================= -->

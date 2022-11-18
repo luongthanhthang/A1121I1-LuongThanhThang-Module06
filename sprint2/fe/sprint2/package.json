@@ -21,9 +21,12 @@
     "@angular/platform-browser-dynamic": "~9.0.7",
     "@angular/router": "~9.0.7",
     "@auth0/angular-jwt": "^5.0.2",
-    "firebase": "^8.6.7",
     "angular-notifier": "^7.0.0",
+    "firebase": "^8.6.7",
+    "jquery": "^3.6.1",
+    "ngx-slick-carousel": "^0.5.1",
     "rxjs": "~6.5.4",
+    "slick-carousel": "^1.8.1",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
   },

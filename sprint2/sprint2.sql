@@ -16,8 +16,8 @@ create table if not exists account_role (
 	account_role_id bigint primary key auto_increment,				
 	account_id bigint not null,				
 	role_id bigint not null,				
-	foreign key (account_id) references `account`(account_id),				
-	foreign key (role_id) references `role`(role_id)	 			
+	foreign key (account_id) references `account`(account_id) on update cascade,				
+	foreign key (role_id) references `role`(role_id) on update cascade	  			
 );
 
 create table customer(
@@ -28,7 +28,7 @@ create table customer(
   customer_image varchar(255),
   customer_address varchar(255),
   customer_account_id bigint unique,
-  foreign key (customer_account_id) references `account` (account_id)
+  foreign key (customer_account_id) references `account` (account_id) on update cascade
 );
 
 create table if not exists category(
@@ -65,28 +65,28 @@ create table if not exists book(
   book_author_id bigint,
   book_promotion_id bigint default 1,
   
-  foreign key(book_promotion_id) references promotion(promotion_id),
-  foreign key(book_category_id) references category(category_id),
-  foreign key(book_author_id) references author(author_id)
+  foreign key(book_promotion_id) references promotion(promotion_id) on update cascade,
+  foreign key(book_category_id) references category(category_id) on update cascade,
+  foreign key(book_author_id) references author(author_id) on update cascade
 );
 
 create table if not exists cart (					
 	cart_id bigint primary key auto_increment,	
-    cart_code varchar(255) not null,
+    cart_code varchar(255),
 	cart_quantity int not null,					
 	cart_total_money double not null,	
 	cart_purchase_date date,
     cart_status bit(1) default 0,
 	cart_account_id bigint,												
-	foreign key (cart_account_id) references `account`(account_id)
+	foreign key (cart_account_id) references `account`(account_id) on update cascade
 );
 
 create table if not exists cart_book (					
 	cart_book_id bigint primary key auto_increment,		
     book_id bigint not null,
 	cart_id bigint not null,					
-	foreign key(cart_id) references cart(cart_id),					
-	foreign key(book_id) references book(book_id)					
+	foreign key(cart_id) references cart(cart_id) on delete cascade,					
+	foreign key(book_id) references book(book_id) on update cascade					
 );
 
 	INSERT INTO `sprint2`.`account` (`username`, `password`) VALUES ('admin', '$2a$10$lqnvHKHPyKkZWMMtBB.jy.hMuPaSNH/Nlfuj6XaHCRLB7PK.EU60K');
@@ -176,16 +176,16 @@ create table if not exists cart_book (
 	INSERT INTO `sprint2`.`book` (`book_code`, `book_name`, `book_image`, `book_content`, `book_price`, `book_translator`, `book_total_page`, `book_size`, `book_publish_date`, `book_quantity`, `book_publisher`, `book_category_id`, `book_author_id`, `book_promotion_id`) VALUES ('BOOK-028', 'Thảm kịch vĩ nhân', 'http://static.nhanam.com.vn/thumb/0x320/crop/Books/Images/2019/10/29/3GX3U5U3.jpg', 'Gần 600 năm trước, khi cuộc chiến chống ngoại bang kết thúc, cũng là lúc cuộc chiến phe cánh trong nội bộ triều đình nhà Lê mở ra. Trong cơn khủng hoảng đó, Nguyễn Trãi trở thành nạn nhân hứng chịu tấn thảm kịch oan khiên nhất, dã man nhất lịch sử nước Việt, mang tên Thảm kịch vĩ nhân.', '28000', 'Ngọc Linh G', '350', '14x20.5 cm', '2022-12-29', '5', 'Hội nhà văn', '7', '22', '1');
 	INSERT INTO `sprint2`.`book` (`book_code`, `book_name`, `book_image`, `book_content`, `book_price`, `book_translator`, `book_total_page`, `book_size`, `book_publish_date`, `book_quantity`, `book_publisher`, `book_category_id`, `book_author_id`, `book_promotion_id`) VALUES ('BOOK-029', 'Về nhà', 'http://static.nhanam.com.vn/thumb/0x320/crop/Books/Images/2019/6/21/C5FA2DHX.jpg', 'Chiều gió mát, tôi không vào Tam Bảo mà ngồi ngoài thềm nghe đại chúng tụng kinh. Từ chỗ ngồi, tôi thấy anh thợ sơn đứng phun nhũ vàng lên các tượng Tỳ Lô Giá Na, phía sau là cây đại trổ đầy hoa đỏ và vượt qua bên ngoài tường chùa là những cành khẳng khiu của cây gạo đã rụng hết lá đang in bóng trên nền trời tráng ánh hoàng hôn. Có con chim sẻ nhỏ đậu trên đường dây điện căng ngang từ nhà tổ sang khu nhà tăng cứ líu lo một mình rất lâu rồi sà xuống sân xi măng tiếp tục líu lo, chân nhảy nhảy vui vẻ.', '29000', 'Ngọc Linh H', '300', '14x20.5 cm', '2021-06-29', '5', 'Hội nhà văn', '7', '23', '1');
 	INSERT INTO `sprint2`.`book` (`book_code`, `book_name`, `book_image`, `book_content`, `book_price`, `book_translator`, `book_total_page`, `book_size`, `book_publish_date`, `book_quantity`, `book_publisher`, `book_category_id`, `book_author_id`, `book_promotion_id`) VALUES ('BOOK-030', 'Ly rượu trần gian', 'http://static.nhanam.com.vn/thumb/0x320/crop/Books/Images/2019/7/8/SN8N3FX2.jpg', 'Lần đầu tiên những trang viết ngắn của Phan Vũ được tập hợp lại để ra mắt bạn đọc. Những khắc họa chân dung cũng như những ghi chép ngắn gọn về đời sống của ông cho thấy một Phan Vũ thật khác, không chỉ là một nhà thơ, họa sĩ mà còn là một cây bút văn xuôi giàu năng lượng. Như một điều hiển nhiên, ông dành nhiều tình cảm cho Hà Nội, ông kể lại nhiều chuyện buồn vui với thành phố này, và cả câu chuyện đằng sau bài thơ đã làm làm nên cái tên Phan Vũ.', '30000', 'Ngọc Linh F', '250', '14x20.5 cm', '2021-07-29', '5', 'Hội nhà văn', '7', '24', '1');
-	INSERT INTO `sprint2`.`book` (`book_code`, `book_name`, `book_image`, `book_content`, `book_price`, `book_translator`, `book_total_page`, `book_size`, `book_publish_date`, `book_quantity`, `book_publisher`, `book_category_id`, `book_author_id`, `book_promotion_id`) VALUES ('BOOK-031', 'Để con được chính - hiểu hết về vắc xin và miễn dịch', 'http://static.nhanam.com.vn/thumb/0x320/crop/Books/Images/2019/6/28/1A4LDY89.jpg', 'Bạn có phân vân trong việc đưa con đi tiêm chủng? Bạn có lo ngại về thông tin vắc xin MMR (sởi-rubella-quai bị) gây hội chứng tự kỷ? Và thủy ngân, cùng nhôm có thể được truyền vào cơ thể của trẻ cùng các mũi vắc xin? Con của bạn có phải là một trong hàng nghìn đứa trẻ mắc sởi vào mùa xuân 2019? Hay bé đã may mắn không mắc bệnh? Và hệ miễn dịch của trẻ, cùng của chính chúng ta thực ra hoạt động như thế nào?', '31000', 'Ngọc Linh I', '200', '14x20.5 cm', '2021-08-29', '5', 'Hội nhà văn', '7', '25', '2');
+	INSERT INTO `sprint2`.`book` (`book_code`, `book_name`, `book_image`, `book_content`, `book_price`, `book_translator`, `book_total_page`, `book_size`, `book_publish_date`, `book_quantity`, `book_publisher`, `book_category_id`, `book_author_id`, `book_promotion_id`) VALUES ('BOOK-031', 'Để con được chính-hiểu về vắc xin và miễn dịch', 'http://static.nhanam.com.vn/thumb/0x320/crop/Books/Images/2019/6/28/1A4LDY89.jpg', 'Bạn có phân vân trong việc đưa con đi tiêm chủng? Bạn có lo ngại về thông tin vắc xin MMR (sởi-rubella-quai bị) gây hội chứng tự kỷ? Và thủy ngân, cùng nhôm có thể được truyền vào cơ thể của trẻ cùng các mũi vắc xin? Con của bạn có phải là một trong hàng nghìn đứa trẻ mắc sởi vào mùa xuân 2019? Hay bé đã may mắn không mắc bệnh? Và hệ miễn dịch của trẻ, cùng của chính chúng ta thực ra hoạt động như thế nào?', '31000', 'Ngọc Linh I', '200', '14x20.5 cm', '2021-08-29', '5', 'Hội nhà văn', '7', '25', '2');
 
 
-	INSERT INTO `sprint2`.`cart` (`cart_code`, `cart_quantity`, `cart_total_money`, `cart_purchase_date`, `cart_account_id`) VALUES ('MHD-001', '1', '1000', '2022-01-01', '1');
-	INSERT INTO `sprint2`.`cart` (`cart_code`, `cart_quantity`, `cart_total_money`, `cart_purchase_date`, `cart_account_id`) VALUES ('MHD-001', '2', '4000', '2022-01-01', '1');
-	INSERT INTO `sprint2`.`cart` (`cart_code`, `cart_quantity`, `cart_total_money`, `cart_purchase_date`, `cart_account_id`) VALUES ('MHD-001', '3', '9000', '2022-01-01', '1');
-    INSERT INTO `sprint2`.`cart` (`cart_code`, `cart_quantity`, `cart_total_money`, `cart_purchase_date`, `cart_account_id`) VALUES ('MHD-002', '1', '4000', '2022-01-01', '2');
-	INSERT INTO `sprint2`.`cart` (`cart_code`, `cart_quantity`, `cart_total_money`, `cart_purchase_date`, `cart_account_id`) VALUES ('MHD-002', '2', '10000', '2022-01-01', '2');
-	INSERT INTO `sprint2`.`cart` (`cart_code`, `cart_quantity`, `cart_total_money`, `cart_purchase_date`, `cart_account_id`) VALUES ('MHD-002', '3', '18000', '2022-01-01', '2');
-	INSERT INTO `sprint2`.`cart` (`cart_code`, `cart_quantity`, `cart_total_money`, `cart_purchase_date`, `cart_account_id`) VALUES ('MHD-002', '4', '18000', '2022-01-01', '2');
+	INSERT INTO `sprint2`.`cart` (`cart_code`, `cart_quantity`, `cart_status`, `cart_total_money`, `cart_purchase_date`, `cart_account_id`) VALUES ('MHD-001', '1', 1, '1000', '2022-01-01', '1');
+	INSERT INTO `sprint2`.`cart` (`cart_code`, `cart_quantity`, `cart_status`, `cart_total_money`, `cart_purchase_date`, `cart_account_id`) VALUES ('MHD-001', '2', 1,'4000', '2022-01-01', '1');
+	INSERT INTO `sprint2`.`cart` (`cart_code`, `cart_quantity`, `cart_status`, `cart_total_money`, `cart_purchase_date`, `cart_account_id`) VALUES ('MHD-001', '3', 1,'9000', '2022-01-01', '1');
+    INSERT INTO `sprint2`.`cart` (`cart_code`, `cart_quantity`, `cart_status`, `cart_total_money`, `cart_purchase_date`, `cart_account_id`) VALUES ('MHD-002', '1', 1,'4000', '2022-01-01', '2');
+	INSERT INTO `sprint2`.`cart` (`cart_code`, `cart_quantity`, `cart_status`, `cart_total_money`, `cart_purchase_date`, `cart_account_id`) VALUES ('MHD-002', '2', 1,'10000', '2022-01-01', '2');
+	INSERT INTO `sprint2`.`cart` (`cart_code`, `cart_quantity`, `cart_status`, `cart_total_money`, `cart_purchase_date`, `cart_account_id`) VALUES ('MHD-002', '3', 1,'18000', '2022-01-01', '2');
+	INSERT INTO `sprint2`.`cart` (`cart_code`, `cart_quantity`, `cart_status`, `cart_total_money`, `cart_purchase_date`, `cart_account_id`) VALUES ('MHD-002', '4', 1,'18000', '2022-01-01', '2');
 
 	INSERT INTO `sprint2`.`cart_book` (`book_id`, `cart_id`) VALUES ('1', '1');
 	INSERT INTO `sprint2`.`cart_book` (`book_id`, `cart_id`) VALUES ('2', '2');
@@ -194,6 +194,22 @@ create table if not exists cart_book (
 	INSERT INTO `sprint2`.`cart_book` (`book_id`, `cart_id`) VALUES ('5', '5');
 	INSERT INTO `sprint2`.`cart_book` (`book_id`, `cart_id`) VALUES ('6', '6');
 	INSERT INTO `sprint2`.`cart_book` (`book_id`, `cart_id`) VALUES ('1', '7');
+    
+    INSERT INTO `sprint2`.`cart` (`cart_quantity`, `cart_total_money`, `cart_status`, `cart_account_id`) VALUES ('5', '22500', b'0', '1');
+	INSERT INTO `sprint2`.`cart` (`cart_quantity`, `cart_total_money`, `cart_status`, `cart_account_id`) VALUES ('6', '32400', b'0', '1');
+	INSERT INTO `sprint2`.`cart` (`cart_quantity`, `cart_total_money`, `cart_status`, `cart_account_id`) VALUES ('7', '41650', b'0', '1');
+	INSERT INTO `sprint2`.`cart` (`cart_quantity`, `cart_total_money`, `cart_status`, `cart_account_id`) VALUES ('2', '13600', b'0', '2');
+	INSERT INTO `sprint2`.`cart` (`cart_quantity`, `cart_total_money`, `cart_status`, `cart_account_id`) VALUES ('3', '21600', b'0', '2');
+	INSERT INTO `sprint2`.`cart` (`cart_quantity`, `cart_total_money`, `cart_status`, `cart_account_id`) VALUES ('4', '32000', b'0', '2');
+    
+    INSERT INTO `sprint2`.`cart_book` (`book_id`, `cart_id`) VALUES ('5', '8');
+	INSERT INTO `sprint2`.`cart_book` (`book_id`, `cart_id`) VALUES ('6', '9');
+	INSERT INTO `sprint2`.`cart_book` (`book_id`, `cart_id`) VALUES ('7', '10');
+	INSERT INTO `sprint2`.`cart_book` (`book_id`, `cart_id`) VALUES ('8', '11');
+	INSERT INTO `sprint2`.`cart_book` (`book_id`, `cart_id`) VALUES ('9', '12');
+	INSERT INTO `sprint2`.`cart_book` (`book_id`, `cart_id`) VALUES ('10', '13');
+
+
 
 
 

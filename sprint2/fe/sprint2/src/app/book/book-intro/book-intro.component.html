@@ -14,14 +14,16 @@
                     <div class="book-in-shelf">
                       <div class="book-shelf">
                         <div class="add-to-cart-action hidden-xs hidden-sm">
-                          <a href="checkout.html" class="add-to-cart-button"><img
+                          <a routerLink="/cart"
+                             class="add-to-cart-button"><img
                             src="../../../assets/images/shopping-cart.png" alt=""/></a>
                         </div> <!-- /.add-to-cart-action-->
                         <div class="book-cover slider-book-cover">
                           <img class="img-responsive" alt=""
                                [src]="bookBestSellerSliderList[0].bookImage"
                                width="258" height="351">
-                          <div class="fade"></div>
+                          <div style="cursor: pointer"
+                               [routerLink]="['/book/detail',bookBestSellerSliderList[0].bookId]" class="fade"></div>
                         </div> <!-- /.book-cover -->
                       </div><!-- /.book-shelf -->
                     </div><!-- /.book-in-shelf -->
@@ -30,7 +32,8 @@
                   <div class="col-sm-7 col-sm-pull-5">
                     <div class="clearfix slider-caption">
                       <div class="slider-caption-heading">
-                        <h1 class="slider-caption-title fadeInDown-1">{{bookBestSellerSliderList[0].bookName}}</h1>
+                        <h1 style="cursor: pointer" [routerLink]="['/book/detail',bookBestSellerSliderList[0].bookId]"
+                            class="slider-caption-title fadeInDown-1">{{bookBestSellerSliderList[0].bookName}}</h1>
                         <div class="wrapper__demo">
                           <p
                             class="slider-caption-subtitle fadeInDown-2 hidden-xs max__width">{{bookBestSellerSliderList[0].bookContent}}</p>
@@ -58,10 +61,12 @@
                     <div class="book-in-shelf">
                       <div class="book-shelf">
                         <div class="add-to-cart-action hidden-xs hidden-sm">
-                          <a href="checkout.html" class="add-to-cart-button"><img
+                          <a routerLink="/cart"
+                             class="add-to-cart-button"><img
                             src="../../../assets/images/shopping-cart.png" alt=""/></a>
                         </div> <!-- /.add-to-cart-action-->
-                        <div class="book-cover slider-book-cover">
+                        <div style="cursor: pointer" [routerLink]="['/book/detail',bookBestSellerSliderList[1].bookId]"
+                             class="book-cover slider-book-cover">
                           <img class="img-responsive" alt=""
                                [src]="bookBestSellerSliderList[1].bookImage"
                                width="258" height="351">
@@ -74,7 +79,8 @@
                   <div class="col-sm-7 col-sm-pull-5">
                     <div class="clearfix slider-caption">
                       <div class="slider-caption-heading">
-                        <h1 class="slider-caption-title fadeInDown-1">{{bookBestSellerSliderList[1].bookName}}</h1>
+                        <h1 style="cursor: pointer" [routerLink]="['/book/detail',bookBestSellerSliderList[1].bookId]"
+                            class="slider-caption-title fadeInDown-1">{{bookBestSellerSliderList[1].bookName}}</h1>
                         <div class="wrapper__demo">
                           <p
                             class="slider-caption-subtitle fadeInDown-2 hidden-xs max__width">{{bookBestSellerSliderList[1].bookContent}}</p>
@@ -100,14 +106,16 @@
                     <div class="book-in-shelf">
                       <div class="book-shelf">
                         <div class="add-to-cart-action hidden-xs hidden-sm">
-                          <a href="checkout.html" class="add-to-cart-button"><img
+                          <a routerLink="/cart"
+                             class="add-to-cart-button"><img
                             src="../../../assets/images/shopping-cart.png" alt=""/></a>
                         </div> <!-- /.add-to-cart-action-->
                         <div class="book-cover slider-book-cover">
                           <img class="img-responsive" alt=""
                                [src]="bookBestSellerSliderList[2].bookImage"
                                width="258" height="351">
-                          <div class="fade"></div>
+                          <div style="cursor: pointer"
+                               [routerLink]="['/book/detail',bookBestSellerSliderList[2].bookId]" class="fade"></div>
                         </div> <!-- /.book-cover -->
                       </div><!-- /.book-shelf -->
                     </div><!-- /.book-in-shelf -->
@@ -116,7 +124,8 @@
                   <div class="col-sm-7 col-sm-pull-5">
                     <div class="clearfix slider-caption">
                       <div class="slider-caption-heading">
-                        <h1 class="slider-caption-title fadeInDown-1">{{bookBestSellerSliderList[2].bookName}}</h1>
+                        <h1 style="cursor: pointer" [routerLink]="['/book/detail',bookBestSellerSliderList[2].bookId]"
+                            class="slider-caption-title fadeInDown-1">{{bookBestSellerSliderList[2].bookName}}</h1>
                         <div class="wrapper__demo">
                           <p
                             class="slider-caption-subtitle fadeInDown-2 hidden-xs max__width">{{bookBestSellerSliderList[2].bookContent}}</p>
@@ -135,41 +144,37 @@
           </div><!-- /.item -->
         </div><!-- /#owl-main -->
 
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-6">
-              <div class="slider-action">
-                <div class="row sub-header" id="search">
-                  <div class='col-md-12'>
-                    <div class="row">
-                      <div class="col-sm-8 no-padding-right">
-                        <div class="input-group">
-                                                                <span class="input-group-btn"><button
-                                                                  class="btn btn-search"
-                                                                  type="button"><i
-                                                                  class="fa fa-search icon"></i></button></span>
-                          <input type="text" class="form-control search-book"
-                                 placeholder="Search books...">
-                        </div><!-- /.input-group -->
-                      </div><!-- /.col -->
+<!--        <div class="container">-->
+<!--          <div class="row">-->
+<!--            <div class="col-sm-6">-->
+<!--              <div class="slider-action">-->
+<!--                <div class="row sub-header" id="search">-->
+<!--                  <div class='col-md-12'>-->
+<!--                    <div class="row">-->
+<!--                      <div class="col-sm-8 no-padding-right">-->
+<!--                        <div class="input-group">-->
+<!--                                                                <span class="input-group-btn"><button-->
+<!--                                                                  class="btn btn-search"-->
+<!--                                                                  type="button"><i-->
+<!--                                                                  class="fa fa-search icon"></i></button></span>-->
+<!--                          <input type="text" class="form-control search-book"-->
+<!--                                 placeholder="Tìm kiếm...">-->
+<!--                        </div>&lt;!&ndash; /.input-group &ndash;&gt;-->
+<!--                      </div>&lt;!&ndash; /.col &ndash;&gt;-->
 
-                      <div class="select-wrapper col-sm-4" style="padding:0px;">
-                        <select id="id_select" class="selectpicker">
-                          <option selected>All Category</option>
-                          <option>Books</option>
-                          <option>Textbooks</option>
-                          <option>Audiobooks</option>
-                          <option>Magazines</option>
-                          <option>Kids</option>
-                        </select>
-                      </div><!-- /.col -->
-                    </div><!-- /.row -->
-                  </div><!-- /.col -->
-                </div><!-- /.row -->
-              </div><!-- /.slider-action -->
-            </div><!-- /.col -->
-          </div><!-- /.row -->
-        </div><!-- /.container -->
+<!--                      <div class="select-wrapper col-sm-4" style="padding:0px;">-->
+<!--                        <select id="id_select" class="selectpicker">-->
+<!--                          <option selected>Tất cả thể loại</option>-->
+<!--                          <option *ngFor="let category of categoryList">{{category.categoryName}}</option>-->
+<!--                        </select>-->
+<!--                      </div>&lt;!&ndash; /.col &ndash;&gt;-->
+<!--                    </div>&lt;!&ndash; /.row &ndash;&gt;-->
+<!--                  </div>&lt;!&ndash; /.col &ndash;&gt;-->
+<!--                </div>&lt;!&ndash; /.row &ndash;&gt;-->
+<!--              </div>&lt;!&ndash; /.slider-action &ndash;&gt;-->
+<!--            </div>&lt;!&ndash; /.col &ndash;&gt;-->
+<!--          </div>&lt;!&ndash; /.row &ndash;&gt;-->
+<!--        </div>&lt;!&ndash; /.container &ndash;&gt;-->
 
       </div>
 
@@ -184,66 +189,81 @@
         <div class="module block-new-books module-block">
           <div class="module-heading">
             <h2 class="module-title">NHỮNG CUỐN SÁCH MỚI</h2>
-            <div class="customNavigation">
-              <a href="#" data-target="#new-carousel"
-                 class="btn btn-navigation left-nav-arrow owl-prev"><i
-                class='icon fa fa-caret-left'></i></a>
-              <a href="#" data-target="#new-carousel"
-                 class="btn btn-navigation right-nav-arrow owl-next"><i
-                class='icon fa fa-caret-right'></i></a>
-            </div><!-- /.customNavigation -->
           </div><!-- /.module-heading -->
+
+          <div class="customNavigation">
+            <a (click)="slickModal.slickGoTo(backBookIntro())" href="#"
+               class="btn btn-navigation left-nav-arrow-seller owl-prev next-slide"><i
+              class='icon fa fa-caret-left'></i></a>
+            <a (click)="slickModal.slickGoTo(nextBookIntro())" href="#"
+               class="btn btn-navigation right-nav-arrow-seller owl-next"><i
+              class='icon fa fa-caret-right'></i></a>
+          </div><!-- /.customNavigation -->
 
           <div class="module-body">
             <div class="books">
-              <div id="new-carousel" class="owl-carousel home-owl-carousel">
-                <div *ngFor="let bookIntro of bookIntroList">
-                  <div class="item item-carousel">
-                    <div class="books">
-                      <div class="book">
-                        <div class="book-cover">
-                          <div class="book-inner">
-                            <img src="../../../assets/images/blank.gif"
-                                 [attr.data-echo]="bookIntro.bookImage" width="193px" height="261px" alt="">
-                            <div class="fade"></div>
-                            <div class="book-price">
-                              <span class="price">{{bookIntro.bookPrice|currency:'vnd'}}</span>
-                            </div><!-- /.book-price -->
+              <ngx-slick-carousel class="carousel"
+                                  #slickModal="slick-carousel"
+                                  [config]="slideConfig">
+                <div ngxSlickItem *ngFor="let bookIntro of bookIntroList" class="slide">
+                  <div class="book">
+                    <div class="sale-ribbon" *ngIf="bookIntro.bookPromotionId.promotionId > 1">
+                      <div class="sale-ribbon-content">sale off</div>
+                    </div>
+                    <div class="book-cover">
+                      <div class="book-inner">
+                        <img [src]="bookIntro.bookImage" width="193"
+                             height="261" alt="">
+                        <div [routerLink]="['/book/detail',bookIntro.bookId]" class="fade"></div>
+                        <div class="book-price">
+                          <span *ngIf="bookIntro.bookPromotionId.promotionId <= 1"
+                                class="price">{{bookIntro.bookPrice|currency:'VND'}}</span>
+                          <span *ngIf="bookIntro.bookPromotionId.promotionId > 1" class="price"><span
+                            class="price-before-discount">{{bookIntro.bookPrice|currency:'VND'}}</span> {{bookIntro.bookPrice - bookIntro.bookPrice * bookIntro.bookPromotionId.promotionPercent / 100 | currency :'VND'}}</span>
+                        </div><!-- /.book-price -->
 
-                            <div class="cart animate-effect">
-                              <div class="action">
-                                <a class="add-to-cart" title="Add to Cart">
-                                  <i class="icon icon-plus fa fa-plus-circle"></i>
-                                </a>
-                                <a class="add-to-cart" title="Favourite">
-                                  <i class="icon icon-heart fa fa-heart"></i>
-                                </a>
-                              </div><!-- /.action -->
-                            </div><!-- /.cart -->
-                          </div><!-- /.book-inner -->
-                        </div><!-- /.book-cover -->
+                        <div class="cart animate-effect">
+                          <div class="action">
+                            <a class="add-to-cart" routerLink="/cart" title="Add to Cart">
+                              <i class="icon icon-plus fa fa-plus-circle"></i>
+                            </a>
+                            <a *ngIf="isLoggedIn && (showAdminBoard)" style="margin-right: 10px" class="add-to-cart" href="#" title="Favourite">
+                              <i class="fa-solid fa-trash"></i>
+                            </a>
+                            <a *ngIf="isLoggedIn && (showAdminBoard)" style="margin-right: 10px" class="add-to-cart" href="#" title="Favourite">
+                              <i class="fa-solid fa-pen-to-square"></i>
+                            </a>
+                            <a class="add-to-cart" href="#" title="Favourite">
+                              <i class="icon icon-heart fa fa-heart"></i>
+                            </a>
+                          </div><!-- /.action -->
+                        </div><!-- /.cart -->
+                      </div><!-- /.book-inner -->
+                    </div><!-- /.book-cover -->
 
-                        <div class="book-details">
-                          <h3 class="book-title"><a>{{bookIntro.bookName}}</a></h3>
-                          <p class="book-author">{{bookIntro.bookAuthorId.authorName}}</p>
-                          <div class="star-rating">
-                            <i class="fa fa-star color"></i>
-                            <i class="fa fa-star color"></i>
-                            <i class="fa fa-star color"></i>
-                            <i class="fa fa-star color"></i>
-                            <i class="fa fa-star "></i>
-                          </div><!-- /.star-rating -->
 
-                        </div><!-- /.book-details -->
-                      </div><!-- /.book -->
-                    </div><!-- /.books -->
-                  </div><!-- /.item -->
+                    <div class="book-details">
+                      <h3 class="book-title" style="width: 192px; font-size: 20px; height: 66px"><a
+                        href="detail.html">{{bookIntro.bookName}}</a></h3>
+                      <p class="book-author">{{bookIntro.bookAuthorId.authorName}}</p>
+                      <p>{{bookIntro.bookQuantity}} sản phẩm có sẵn</p>
+                      <div class="star-rating">
+                        <i class="fa fa-star color"></i>
+                        <i class="fa fa-star color"></i>
+                        <i class="fa fa-star color"></i>
+                        <i class="fa fa-star color"></i>
+                        <i class="fa fa-star "></i>
+                      </div><!-- /.star-rating -->
+
+                    </div><!-- /.book-details -->
+                  </div><!-- /.book -->
                 </div>
-              </div><!-- /#new-carousel -->
-            </div><!-- /.books -->
-          </div><!-- /.module-body -->
-        </div><!-- /.module -->
-      </div><!-- /.row -->
+              </ngx-slick-carousel>
+            </div><!-- /#new-carousel -->
+          </div><!-- /.books -->
+        </div><!-- /.module-body -->
+      </div><!-- /.module -->
+
       <!-- ========================================= NEW BOOKS MODULE : END ========================================= -->
       <!-- /.block-new-books -->
 
@@ -253,42 +273,50 @@
         <div class="module block-best-sellers module-block">
           <div class="module-heading">
             <h2 class="module-title">Sách bán chạy</h2>
-            <div class="customNavigation">
-              <a href="#" data-target="#seller-carousel"
-                 class="btn btn-navigation left-nav-arrow-seller owl-prev"><i
-                class='icon fa fa-caret-left'></i></a>
-              <a href="#" data-target="#seller-carousel"
-                 class="btn btn-navigation right-nav-arrow-seller owl-next"><i
-                class='icon fa fa-caret-right'></i></a>
-            </div><!-- /.customNavigation -->
           </div><!-- /.module-heading -->
+
+          <div class="customNavigation">
+            <a (click)="slickModalBestSeller.slickGoTo(backBookBestSeller())" href="#"
+               class="btn btn-navigation left-nav-arrow-seller owl-prev next-slide"><i
+              class='icon fa fa-caret-left'></i></a>
+            <a (click)="slickModalBestSeller.slickGoTo(nextBookBestSeller())" href="#"
+               class="btn btn-navigation right-nav-arrow-seller owl-next"><i
+              class='icon fa fa-caret-right'></i></a>
+          </div><!-- /.customNavigation -->
 
           <div class="module-body">
             <div class="books">
-
-              <div id="seller-carousel" class="owl-carousel home-owl-carousel">
-                <div class="item item-carousel">
-
+              <ngx-slick-carousel class="carousel"
+                                  #slickModalBestSeller="slick-carousel"
+                                  [config]="slideConfig">
+                <div ngxSlickItem *ngFor="let bookIntroBestSeller of bookBestSeller" class="slide">
                   <div class="book">
-                    <div class="sale-ribbon">
+                    <div class="sale-ribbon" *ngIf="bookIntroBestSeller.bookPromotionId.promotionId > 1">
                       <div class="sale-ribbon-content">sale off</div>
                     </div>
                     <div class="book-cover">
                       <div class="book-inner">
-                        <img src="../../../assets/images/blank.gif"
-                             data-echo="assets/images/best-sellers/1.jpg" width="193"
+                        <img [src]="bookIntroBestSeller.bookImage" width="193"
                              height="261" alt="">
-                        <div class="fade"></div>
+                        <div style="cursor: pointer" [routerLink]="['/book/detail',bookIntroBestSeller.bookId]"
+                             class="fade"></div>
                         <div class="book-price">
-                          <span class="price">
-                            <span class="price-before-discount">$ 10.99</span>$ 9.99</span>
+                          <span *ngIf="bookIntroBestSeller.bookPromotionId.promotionId <= 1"
+                                class="price">{{bookIntroBestSeller.bookPrice|currency:'VND'}}</span>
+                          <span *ngIf="bookIntroBestSeller.bookPromotionId.promotionId > 1" class="price"><span
+                            class="price-before-discount">{{bookIntroBestSeller.bookPrice|currency:'VND'}}</span> {{bookIntroBestSeller.bookPrice - bookIntroBestSeller.bookPrice * bookIntroBestSeller.bookPromotionId.promotionPercent / 100 | currency :'VND'}}</span>
                         </div><!-- /.book-price -->
 
                         <div class="cart animate-effect">
                           <div class="action">
-                            <a class="add-to-cart" href="detail.html"
-                               title="Add to Cart">
+                            <a routerLink="/cart" class="add-to-cart" title="Add to Cart">
                               <i class="icon icon-plus fa fa-plus-circle"></i>
+                            </a>
+                            <a *ngIf="isLoggedIn && (showAdminBoard)" style="margin-right: 10px" class="add-to-cart" href="#" title="Favourite">
+                              <i class="fa-solid fa-trash"></i>
+                            </a>
+                            <a *ngIf="isLoggedIn && (showAdminBoard)" style="margin-right: 10px" class="add-to-cart" href="#" title="Favourite">
+                              <i class="fa-solid fa-pen-to-square"></i>
                             </a>
                             <a class="add-to-cart" href="#" title="Favourite">
                               <i class="icon icon-heart fa fa-heart"></i>
@@ -300,8 +328,10 @@
 
 
                     <div class="book-details">
-                      <h3 class="book-title"><a href="detail.html">Adipisicing</a></h3>
-                      <p class="book-author">dolor sit</p>
+                      <h3 class="book-title" style="width: 192px; font-size: 20px; height: 66px"><a
+                        href="detail.html">{{bookIntroBestSeller.bookName}}</a></h3>
+                      <p class="book-author">{{bookIntroBestSeller.bookAuthorId.authorName}}</p>
+                      <p>{{bookIntroBestSeller.bookQuantity}} sản phẩm có sẵn</p>
                       <div class="star-rating">
                         <i class="fa fa-star color"></i>
                         <i class="fa fa-star color"></i>
@@ -312,294 +342,15 @@
 
                     </div><!-- /.book-details -->
                   </div><!-- /.book -->
-
-                </div><!-- /.item -->
-
-                <div class="item item-carousel">
-
-                  <div class="book">
-                    <div class="book-cover">
-                      <div class="book-inner">
-                        <img src="../../../assets/images/blank.gif"
-                             data-echo="../../../assets/images/best-sellers/2.jpg" width="193"
-                             height="261" alt="">
-                        <div class="fade"></div>
-                        <div class="book-price">
-
-                                                                <span class="price">
-                                                                    $ 9.99                      </span>
-                        </div><!-- /.book-price -->
-
-                        <div class="cart animate-effect">
-                          <div class="action">
-                            <a class="add-to-cart" href="detail.html"
-                               title="Add to Cart">
-                              <i class="icon icon-plus fa fa-plus-circle"></i>
-                            </a>
-                            <a class="add-to-cart" href="#" title="Favourite">
-                              <i class="icon icon-heart fa fa-heart"></i>
-                            </a>
-                          </div><!-- /.action -->
-                        </div><!-- /.cart -->
-                      </div><!-- /.book-inner -->
-                    </div><!-- /.book-cover -->
-
-
-                    <div class="book-details">
-                      <h3 class="book-title"><a href="detail.html">Elit, Sed do</a></h3>
-                      <p class="book-author">consectetur</p>
-                      <div class="star-rating">
-                        <i class="fa fa-star color"></i>
-                        <i class="fa fa-star color"></i>
-                        <i class="fa fa-star color"></i>
-                        <i class="fa fa-star color"></i>
-                        <i class="fa fa-star "></i>
-                      </div><!-- /.star-rating -->
-
-                    </div><!-- /.book-details -->
-                  </div><!-- /.book -->
-
-                </div><!-- /.item -->
-                <div class="item item-carousel">
-
-                  <div class="book">
-                    <div class="book-cover">
-                      <div class="book-inner">
-                        <img src="../../../assets/images/blank.gif"
-                             data-echo="../../../assets/images/best-sellers/3.jpg" width="193"
-                             height="261" alt="">
-                        <div class="fade"></div>
-                        <div class="book-price">
-
-                                                                    <span class="price">
-                                                                        $ 9.99                      </span>
-                        </div><!-- /.book-price -->
-
-                        <div class="cart animate-effect">
-                          <div class="action">
-                            <a class="add-to-cart" href="detail.html"
-                               title="Add to Cart">
-                              <i class="icon icon-plus fa fa-plus-circle"></i>
-                            </a>
-                            <a class="add-to-cart" href="#" title="Favourite">
-                              <i class="icon icon-heart fa fa-heart"></i>
-                            </a>
-                          </div><!-- /.action -->
-                        </div><!-- /.cart -->
-                      </div><!-- /.book-inner -->
-                    </div><!-- /.book-cover -->
-
-
-                    <div class="book-details">
-                      <h3 class="book-title"><a href="detail.html">Tempor</a></h3>
-                      <p class="book-author">Adipisicing Soibhan</p>
-                      <div class="star-rating">
-                        <i class="fa fa-star color"></i>
-                        <i class="fa fa-star color"></i>
-                        <i class="fa fa-star color"></i>
-                        <i class="fa fa-star color"></i>
-                        <i class="fa fa-star "></i>
-                      </div><!-- /.star-rating -->
-
-                    </div><!-- /.book-details -->
-                  </div><!-- /.book -->
-
-                </div><!-- /.item -->
-                <div class="item item-carousel">
-
-                  <div class="book">
-                    <div class="hot-ribbon">
-                      <div class="hot-ribbon-content">hot</div>
-                    </div>
-                    <div class="book-cover">
-                      <div class="book-inner">
-                        <img src="../../../assets/images/blank.gif"
-                             data-echo="../../../assets/images/best-sellers/4.jpg" width="193"
-                             height="261" alt="">
-                        <div class="fade"></div>
-                        <div class="book-price">
-
-                                                                    <span class="price">
-                                                                        $ 9.99                      </span>
-                        </div><!-- /.book-price -->
-
-                        <div class="cart animate-effect">
-                          <div class="action">
-                            <a class="add-to-cart" href="detail.html"
-                               title="Add to Cart">
-                              <i class="icon icon-plus fa fa-plus-circle"></i>
-                            </a>
-                            <a class="add-to-cart" href="#" title="Favourite">
-                              <i class="icon icon-heart fa fa-heart"></i>
-                            </a>
-                          </div><!-- /.action -->
-                        </div><!-- /.cart -->
-                      </div><!-- /.book-inner -->
-                    </div><!-- /.book-cover -->
-
-
-                    <div class="book-details">
-                      <h3 class="book-title"><a href="detail.html">Labor</a></h3>
-                      <p class="book-author">Sed Do</p>
-                      <div class="star-rating">
-                        <i class="fa fa-star color"></i>
-                        <i class="fa fa-star color"></i>
-                        <i class="fa fa-star color"></i>
-                        <i class="fa fa-star color"></i>
-                        <i class="fa fa-star "></i>
-                      </div><!-- /.star-rating -->
-
-                    </div><!-- /.book-details -->
-                  </div><!-- /.book -->
-
-                </div><!-- /.item -->
-                <div class="item item-carousel">
-
-                  <div class="book">
-                    <div class="book-cover">
-                      <div class="book-inner">
-                        <img src="../../../assets/images/blank.gif"
-                             data-echo="../../../assets/images/best-sellers/5.jpg" width="193"
-                             height="261" alt="">
-                        <div class="fade"></div>
-                        <div class="book-price">
-
-                                                                        <span class="price">
-                                                                            $ 9.99                      </span>
-                        </div><!-- /.book-price -->
-
-                        <div class="cart animate-effect">
-                          <div class="action">
-                            <a class="add-to-cart" href="detail.html"
-                               title="Add to Cart">
-                              <i class="icon icon-plus fa fa-plus-circle"></i>
-                            </a>
-                            <a class="add-to-cart" href="#" title="Favourite">
-                              <i class="icon icon-heart fa fa-heart"></i>
-                            </a>
-                          </div><!-- /.action -->
-                        </div><!-- /.cart -->
-                      </div><!-- /.book-inner -->
-                    </div><!-- /.book-cover -->
-
-
-                    <div class="book-details">
-                      <h3 class="book-title"><a href="detail.html">Labor</a></h3>
-                      <p class="book-author">Sed Do</p>
-                      <div class="star-rating">
-                        <i class="fa fa-star color"></i>
-                        <i class="fa fa-star color"></i>
-                        <i class="fa fa-star color"></i>
-                        <i class="fa fa-star color"></i>
-                        <i class="fa fa-star "></i>
-                      </div><!-- /.star-rating -->
-
-                    </div><!-- /.book-details -->
-                  </div><!-- /.book -->
-
-                </div><!-- /.item -->
-                <div class="item item-carousel">
-
-                  <div class="book">
-                    <div class="hot-ribbon">
-                      <div class="hot-ribbon-content">hot</div>
-                    </div>
-                    <div class="book-cover">
-                      <div class="book-inner">
-                        <img src="../../../assets/images/blank.gif"
-                             data-echo="../../../assets/images/best-sellers/6.jpg" width="193"
-                             height="261" alt="">
-                        <div class="fade"></div>
-                        <div class="book-price">
-
-                                                                        <span class="price">
-                                                                            $ 9.99                      </span>
-                        </div><!-- /.book-price -->
-
-                        <div class="cart animate-effect">
-                          <div class="action">
-                            <a class="add-to-cart" href="detail.html"
-                               title="Add to Cart">
-                              <i class="icon icon-plus fa fa-plus-circle"></i>
-                            </a>
-                            <a class="add-to-cart" href="#" title="Favourite">
-                              <i class="icon icon-heart fa fa-heart"></i>
-                            </a>
-                          </div><!-- /.action -->
-                        </div><!-- /.cart -->
-                      </div><!-- /.book-inner -->
-                    </div><!-- /.book-cover -->
-
-
-                    <div class="book-details">
-                      <h3 class="book-title"><a href="detail.html">Labor</a></h3>
-                      <p class="book-author">Sed Do</p>
-                      <div class="star-rating">
-                        <i class="fa fa-star color"></i>
-                        <i class="fa fa-star color"></i>
-                        <i class="fa fa-star color"></i>
-                        <i class="fa fa-star color"></i>
-                        <i class="fa fa-star "></i>
-                      </div><!-- /.star-rating -->
-
-                    </div><!-- /.book-details -->
-                  </div><!-- /.book -->
-
-                </div><!-- /.item -->
-                <div class="item item-carousel">
-                  <div class="book">
-                    <div class="sale-ribbon">
-                      <div class="sale-ribbon-content">sale off</div>
-                    </div>
-                    <div class="book-cover">
-                      <div class="book-inner">
-                        <img src="../../../assets/images/blank.gif"
-                             data-echo="../../../assets/images/best-sellers/7.jpg" width="193"
-                             height="261" alt="">
-                        <div class="fade"></div>
-                        <div class="book-price">
-
-                          <span class="price"><span class="price-before-discount">$ 10.99</span>$ 9.99</span>
-                        </div><!-- /.book-price -->
-
-                        <div class="cart animate-effect">
-                          <div class="action">
-                            <a class="add-to-cart" href="detail.html"
-                               title="Add to Cart">
-                              <i class="icon icon-plus fa fa-plus-circle"></i>
-                            </a>
-                            <a class="add-to-cart" href="#" title="Favourite">
-                              <i class="icon icon-heart fa fa-heart"></i>
-                            </a>
-                          </div><!-- /.action -->
-                        </div><!-- /.cart -->
-                      </div><!-- /.book-inner -->
-                    </div><!-- /.book-cover -->
-
-
-                    <div class="book-details">
-                      <h3 class="book-title"><a href="detail.html">Labor</a></h3>
-                      <p class="book-author">Sed Do</p>
-                      <div class="star-rating">
-                        <i class="fa fa-star color"></i>
-                        <i class="fa fa-star color"></i>
-                        <i class="fa fa-star color"></i>
-                        <i class="fa fa-star color"></i>
-                        <i class="fa fa-star "></i>
-                      </div><!-- /.star-rating -->
-
-                    </div><!-- /.book-details -->
-                  </div><!-- /.book -->
-
-                </div><!-- /.item -->
-              </div><!-- /#seller-carousel -->
-            </div><!-- /.books -->
-          </div><!-- /.module-body -->
+                </div>
+              </ngx-slick-carousel>
+            </div><!-- /#new-carousel -->
+          </div><!-- /.books -->
         </div><!-- /.module -->
       </div><!-- /.row -->
-      <!-- ========================================= BEST SELLER MODULE : END ========================================= -->
-      <!-- /.block-best-sellers -->
     </div><!-- /.container -->
+    <!-- ========================================= BEST SELLER MODULE : END ========================================= -->
+    <!-- /.block-best-sellers -->
 
     <!-- .block-featured-author -->
     <div class="featured-item-block">
@@ -609,122 +360,40 @@
           <div class="module block-featured-author module-block">
             <div class="module-heading">
               <h2 class="module-title">TÁC GIẢ NỔI BẬT</h2>
-              <div class="customNavigation">
-                <a href="#" data-target="#featured-author-carousel"
-                   class="btn btn-navigation left-nav-arrow-featured owl-prev"><i
-                  class='icon fa fa-caret-left'></i></a>
-                <a href="#" data-target="#featured-author-carousel"
-                   class="btn btn-navigation right-nav-arrow-featured owl-next"><i
-                  class='icon fa fa-caret-right'></i></a>
-              </div><!-- /.customNavigation -->
-
             </div><!-- /.module-heading -->
 
-            <div class="module-body" id="featured-author">
+            <div class="customNavigation">
+              <a (click)="slickModalAuthor.slickGoTo(backBookBestSeller())" href="#"
+                 class="btn btn-navigation left-nav-arrow-seller owl-prev next-slide"><i
+                class='icon fa fa-caret-left'></i></a>
+              <a (click)="slickModalAuthor.slickGoTo(nextBookBestSeller())" href="#"
+                 class="btn btn-navigation right-nav-arrow-seller owl-next"><i
+                class='icon fa fa-caret-right'></i></a>
+            </div><!-- /.customNavigation -->
+
+            <div class="module-body">
               <div class="authors">
+                <ngx-slick-carousel class="carousel"
+                                    #slickModalAuthor="slick-carousel"
+                                    [config]="slideConfig">
+                  <div ngxSlickItem *ngFor="let author of authorList" class="slide">
 
-                <div id="featured-author-carousel" class="owl-carousel">
-                  <div class="item item-author-block author">
-                    <a href="detail.html">
-                      <div class="author-dp">
-                        <img src="assets/images/blank.gif"
-                             data-echo="assets/images/book-authors/1.jpg" alt="">
-                      </div>
-                    </a>
-                    <div class="author-details">
-                      <h3 class="author-name"><a href="detail.html">KYDesigner</a></h3>
-                      <button disabled href="category.html" class="btn btn-primary btn-view-books">View
-                        Books
-                      </button>
-                    </div><!-- /.author-details -->
-                  </div><!-- /.item -->
-
-                  <div class="item item-author-block author">
-                    <a href="detail.html">
-                      <div class="author-dp">
-                        <img src="assets/images/blank.gif"
-                             data-echo="assets/images/book-authors/3.jpg" alt="">
-                      </div>
-                    </a>
-                    <div class="author-details">
-                      <h3 class="author-name"><a href="detail.html">Julliet Same</a></h3>
-                      <blockquote class="author-testimonial">..Lorem ipsum dolor sit amet,<br>consectetur
-                        adipisicing elit...
-                      </blockquote>
-                      <a href="category.html" class="btn btn-primary btn-view-books">View
-                        Books</a>
-                    </div><!-- /.author-details -->
-                  </div><!-- /.item -->
-
-
-                  <div class="item item-author-block author">
-                    <a href="detail.html">
-                      <div class="author-dp">
-                        <img src="assets/images/blank.gif"
-                             data-echo="assets/images/book-authors/2.jpg" alt="">
-                      </div>
-                    </a>
-                    <div class="author-details">
-                      <h3 class="author-name"><a href="detail.html">Micheal Jackiet</a></h3>
-                      <blockquote class="author-testimonial">..Lorem ipsum dolor sit amet,<br>consectetur
-                        adipisicing elit...
-                      </blockquote>
-                      <a href="category.html" class="btn btn-primary btn-view-books">View
-                        Books</a>
-                    </div><!-- /.author-details -->
-                  </div><!-- /.item -->
-
-                  <div class="item item-author-block author">
-                    <a href="detail.html">
-                      <div class="author-dp">
-                        <img src="assets/images/blank.gif"
-                             data-echo="assets/images/book-authors/3.jpg" alt="">
-                      </div>
-                    </a>
-                    <div class="author-details">
-                      <h3 class="author-name"><a href="detail.html">Julliet Same</a></h3>
-                      <blockquote class="author-testimonial">..Lorem ipsum dolor sit amet,<br>consectetur
-                        adipisicing elit...
-                      </blockquote>
-                      <a href="category.html" class="btn btn-primary btn-view-books">View
-                        Books</a>
-                    </div><!-- /.author-details -->
-                  </div><!-- /.item -->
-
-                  <div class="item item-author-block author">
-                    <a href="detail.html">
-                      <div class="author-dp">
-                        <img src="assets/images/blank.gif"
-                             data-echo="assets/images/book-authors/1.jpg" alt="">
-                      </div>
-                    </a>
-                    <div class="author-details">
-                      <h3 class="author-name"><a href="detail.html">Julliet Same</a></h3>
-                      <blockquote class="author-testimonial">..Lorem ipsum dolor sit amet,<br>consectetur
-                        adipisicing elit...
-                      </blockquote>
-                      <a href="category.html" class="btn btn-primary btn-view-books">View
-                        Books</a>
-                    </div><!-- /.author-details -->
-                  </div><!-- /.item -->
-
-                  <div class="item item-author-block author">
-                    <a href="detail.html">
-                      <div class="author-dp">
-                        <img src="assets/images/blank.gif"
-                             data-echo="assets/images/book-authors/3.jpg" alt="">
-                      </div>
-                    </a>
-                    <div class="author-details">
-                      <h3 class="author-name"><a href="detail.html">Julliet Same</a></h3>
-                      <blockquote class="author-testimonial">..Lorem ipsum dolor sit amet,<br>consectetur
-                        adipisicing elit...
-                      </blockquote>
-                      <a href="category.html" class="btn btn-primary btn-view-books">View
-                        Books</a>
-                    </div><!-- /.author-details -->
-                  </div><!-- /.item -->
-                </div><!-- /#featured-author-carousel -->
+                    <div class="item item-author-block author">
+                      <a href="detail.html">
+                        <div class="author-dp">
+                          <img style="transform: translate(20%);" [src]="author.authorAvatar" alt="" width="198"
+                               height="198">
+                        </div>
+                      </a>
+                      <div class="author-details">
+                        <h3 class="author-name text-center"><a href="detail.html">{{author.authorName}}</a></h3>
+                        <button style="transform: translate(14%);" disabled href="category.html"
+                                class="btn btn-primary btn-view-books">View Books
+                        </button>
+                      </div><!-- /.author-details -->
+                    </div><!-- /.item -->
+                  </div><!-- /#featured-author-carousel -->
+                </ngx-slick-carousel>
               </div><!-- /.authors -->
             </div><!-- /.module-body -->
           </div><!-- /.module -->
