@@ -21,4 +21,12 @@ public interface ICartRepository extends JpaRepository<Cart, Long> {
     @Modifying
     @Query(value = "UPDATE `cart` SET `cart`.cart_quantity = ?1, `cart`.cart_total_money = ?2 WHERE (`cart`.cart_id = ?3)", nativeQuery = true)
     void updateQuantityCart(Integer cartQuantity, Double cartTotalMoney, Long cartId);
+
+    @Modifying
+    @Query(value = "UPDATE `cart` SET `cart_code` = ?1, `cart_purchase_date` = ?2, `cart_status` = ?3 WHERE (`cart_id` = ?4);", nativeQuery = true)
+    void paymentCart(String cartCode, String cartPurchaseDate, Boolean cartStatus, Long cartId);
+
+    // check code
+    @Query(value = "SELECT `cart`.cart_code FROM `cart` where `cart`.cart_code is not null;", nativeQuery = true)
+    List<String> checkCodeCart();
 }

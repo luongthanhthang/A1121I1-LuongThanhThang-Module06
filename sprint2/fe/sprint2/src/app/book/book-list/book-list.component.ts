@@ -2,9 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {BookService} from '../../service/book.service';
 import {IBook} from '../../model/book/IBook';
 import {ICategory} from '../../model/book/ICategory';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl, FormGroup} from '@angular/forms';
 import {TokenStorageService} from '../../service/security/token-storage.service';
+import {CartService} from '../../service/cart.service';
+import {NotifierService} from 'angular-notifier';
 
 @Component({
   selector: 'app-book-list',
@@ -38,10 +40,15 @@ export class BookListComponent implements OnInit {
   showCustomer = false;
   userName: string;
 
+  accountId: number;
+
   constructor(
     private bookService: BookService,
     private activatedRoute: ActivatedRoute,
-    private tokenStorageService: TokenStorageService
+    private cartService: CartService,
+    private notification: NotifierService,
+    private tokenStorageService: TokenStorageService,
+    private router: Router
   ) {
   }
 
@@ -78,6 +85,22 @@ export class BookListComponent implements OnInit {
 
       console.log('roles: ' + this.roles);
     }
+
+    this.accountId = this.tokenStorageService.getUser().account.accountId;
+  }
+
+  // thêm sách vào giỏ hàng
+  addBook(bookAdd: IBook) {
+    bookAdd.bookQuantity = 1;
+    this.cartService.addBook(this.accountId, bookAdd).subscribe(() => {
+    }, (error) => {
+      this.notification.notify('error', error.error);
+    }, () => {
+      this.notification.notify('success', 'Thêm sách vào giỏ hàng thành công');
+      // this.router.navigateByUrl('/header', { skipLocationChange: true }).then(() => {
+      //   this.router.navigateByUrl('/book/list');
+      // });
+    });
   }
 
   // ========list======

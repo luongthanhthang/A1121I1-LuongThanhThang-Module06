@@ -14,7 +14,10 @@
                     <div class="book-in-shelf">
                       <div class="book-shelf">
                         <div class="add-to-cart-action hidden-xs hidden-sm">
-                          <a routerLink="/cart"
+                          <a *ngIf="!isLoggedIn" style="cursor: pointer" routerLink="/cart"
+                             class="add-to-cart-button"><img
+                            src="../../../assets/images/shopping-cart.png" alt=""/></a>
+                          <a *ngIf="isLoggedIn" style="cursor: pointer" (click)="addBook(bookBestSellerSliderList[0])"
                              class="add-to-cart-button"><img
                             src="../../../assets/images/shopping-cart.png" alt=""/></a>
                         </div> <!-- /.add-to-cart-action-->
@@ -41,7 +44,7 @@
                       </div><!-- /.slider-caption-heading -->
                       <div class="clearfix slider-price fadeInDown-3 hidden-xs">
                         <a class="btn btn-secondary btn-price"
-                           href="category.html">{{bookBestSellerSliderList[0].bookPrice | currency: 'VND'}}</a>
+                           (click)="addBook(bookBestSellerSliderList[0])">{{bookBestSellerSliderList[0].bookPrice | currency: 'VND'}}</a>
                       </div> <!-- /.slider-price -->
                     </div><!-- /.slider-caption -->
                   </div><!-- /.col -->
@@ -61,7 +64,10 @@
                     <div class="book-in-shelf">
                       <div class="book-shelf">
                         <div class="add-to-cart-action hidden-xs hidden-sm">
-                          <a routerLink="/cart"
+                          <a *ngIf="!isLoggedIn" style="cursor: pointer" routerLink="/cart"
+                             class="add-to-cart-button"><img
+                            src="../../../assets/images/shopping-cart.png" alt=""/></a>
+                          <a *ngIf="isLoggedIn" style="cursor: pointer" (click)="addBook(bookBestSellerSliderList[1])"
                              class="add-to-cart-button"><img
                             src="../../../assets/images/shopping-cart.png" alt=""/></a>
                         </div> <!-- /.add-to-cart-action-->
@@ -88,7 +94,7 @@
                       </div><!-- /.slider-caption-heading -->
                       <div class="clearfix slider-price fadeInDown-3 hidden-xs">
                         <a class="btn btn-secondary btn-price"
-                           href="category.html">{{bookBestSellerSliderList[1].bookPrice|currency: 'VND'}}</a>
+                           (click)="addBook(bookBestSellerSliderList[1])">{{bookBestSellerSliderList[1].bookPrice|currency: 'VND'}}</a>
                       </div> <!-- /.slider-price -->
                     </div><!-- /.slider-caption -->
                   </div><!-- /.col -->
@@ -106,7 +112,10 @@
                     <div class="book-in-shelf">
                       <div class="book-shelf">
                         <div class="add-to-cart-action hidden-xs hidden-sm">
-                          <a routerLink="/cart"
+                          <a *ngIf="!isLoggedIn" style="cursor: pointer" routerLink="/cart"
+                             class="add-to-cart-button"><img
+                            src="../../../assets/images/shopping-cart.png" alt=""/></a>
+                          <a *ngIf="isLoggedIn" style="cursor: pointer" (click)="addBook(bookBestSellerSliderList[2])"
                              class="add-to-cart-button"><img
                             src="../../../assets/images/shopping-cart.png" alt=""/></a>
                         </div> <!-- /.add-to-cart-action-->
@@ -133,7 +142,7 @@
                       </div><!-- /.slider-caption-heading -->
                       <div class="clearfix slider-price fadeInDown-3 hidden-xs">
                         <a class="btn btn-secondary btn-price"
-                           href="category.html">{{bookBestSellerSliderList[2].bookPrice | currency: 'VND'}}</a>
+                           (click)="addBook(bookBestSellerSliderList[2])">{{bookBestSellerSliderList[2].bookPrice | currency: 'VND'}}</a>
                       </div> <!-- /.slider-price -->
                     </div><!-- /.slider-caption -->
                   </div><!-- /.col -->
@@ -144,37 +153,37 @@
           </div><!-- /.item -->
         </div><!-- /#owl-main -->
 
-<!--        <div class="container">-->
-<!--          <div class="row">-->
-<!--            <div class="col-sm-6">-->
-<!--              <div class="slider-action">-->
-<!--                <div class="row sub-header" id="search">-->
-<!--                  <div class='col-md-12'>-->
-<!--                    <div class="row">-->
-<!--                      <div class="col-sm-8 no-padding-right">-->
-<!--                        <div class="input-group">-->
-<!--                                                                <span class="input-group-btn"><button-->
-<!--                                                                  class="btn btn-search"-->
-<!--                                                                  type="button"><i-->
-<!--                                                                  class="fa fa-search icon"></i></button></span>-->
-<!--                          <input type="text" class="form-control search-book"-->
-<!--                                 placeholder="Tìm kiếm...">-->
-<!--                        </div>&lt;!&ndash; /.input-group &ndash;&gt;-->
-<!--                      </div>&lt;!&ndash; /.col &ndash;&gt;-->
+        <!--        <div class="container">-->
+        <!--          <div class="row">-->
+        <!--            <div class="col-sm-6">-->
+        <!--              <div class="slider-action">-->
+        <!--                <div class="row sub-header" id="search">-->
+        <!--                  <div class='col-md-12'>-->
+        <!--                    <div class="row">-->
+        <!--                      <div class="col-sm-8 no-padding-right">-->
+        <!--                        <div class="input-group">-->
+        <!--                                                                <span class="input-group-btn"><button-->
+        <!--                                                                  class="btn btn-search"-->
+        <!--                                                                  type="button"><i-->
+        <!--                                                                  class="fa fa-search icon"></i></button></span>-->
+        <!--                          <input type="text" class="form-control search-book"-->
+        <!--                                 placeholder="Tìm kiếm...">-->
+        <!--                        </div>&lt;!&ndash; /.input-group &ndash;&gt;-->
+        <!--                      </div>&lt;!&ndash; /.col &ndash;&gt;-->
 
-<!--                      <div class="select-wrapper col-sm-4" style="padding:0px;">-->
-<!--                        <select id="id_select" class="selectpicker">-->
-<!--                          <option selected>Tất cả thể loại</option>-->
-<!--                          <option *ngFor="let category of categoryList">{{category.categoryName}}</option>-->
-<!--                        </select>-->
-<!--                      </div>&lt;!&ndash; /.col &ndash;&gt;-->
-<!--                    </div>&lt;!&ndash; /.row &ndash;&gt;-->
-<!--                  </div>&lt;!&ndash; /.col &ndash;&gt;-->
-<!--                </div>&lt;!&ndash; /.row &ndash;&gt;-->
-<!--              </div>&lt;!&ndash; /.slider-action &ndash;&gt;-->
-<!--            </div>&lt;!&ndash; /.col &ndash;&gt;-->
-<!--          </div>&lt;!&ndash; /.row &ndash;&gt;-->
-<!--        </div>&lt;!&ndash; /.container &ndash;&gt;-->
+        <!--                      <div class="select-wrapper col-sm-4" style="padding:0px;">-->
+        <!--                        <select id="id_select" class="selectpicker">-->
+        <!--                          <option selected>Tất cả thể loại</option>-->
+        <!--                          <option *ngFor="let category of categoryList">{{category.categoryName}}</option>-->
+        <!--                        </select>-->
+        <!--                      </div>&lt;!&ndash; /.col &ndash;&gt;-->
+        <!--                    </div>&lt;!&ndash; /.row &ndash;&gt;-->
+        <!--                  </div>&lt;!&ndash; /.col &ndash;&gt;-->
+        <!--                </div>&lt;!&ndash; /.row &ndash;&gt;-->
+        <!--              </div>&lt;!&ndash; /.slider-action &ndash;&gt;-->
+        <!--            </div>&lt;!&ndash; /.col &ndash;&gt;-->
+        <!--          </div>&lt;!&ndash; /.row &ndash;&gt;-->
+        <!--        </div>&lt;!&ndash; /.container &ndash;&gt;-->
 
       </div>
 
@@ -224,13 +233,19 @@
 
                         <div class="cart animate-effect">
                           <div class="action">
-                            <a class="add-to-cart" routerLink="/cart" title="Add to Cart">
+                            <a *ngIf="!isLoggedIn" style="cursor: pointer" class="add-to-cart" routerLink="/cart" title="Add to Cart">
                               <i class="icon icon-plus fa fa-plus-circle"></i>
                             </a>
-                            <a *ngIf="isLoggedIn && (showAdminBoard)" style="margin-right: 10px" class="add-to-cart" href="#" title="Favourite">
+                            <a *ngIf="isLoggedIn" style="cursor: pointer" class="add-to-cart" (click)="addBook(bookIntro)" title="Add to Cart">
+                              <i class="icon icon-plus fa fa-plus-circle"></i>
+                            </a>
+
+                            <a *ngIf="isLoggedIn && (showAdminBoard)" style="margin-right: 10px" class="add-to-cart"
+                               href="#" title="Favourite">
                               <i class="fa-solid fa-trash"></i>
                             </a>
-                            <a *ngIf="isLoggedIn && (showAdminBoard)" style="margin-right: 10px" class="add-to-cart" href="#" title="Favourite">
+                            <a *ngIf="isLoggedIn && (showAdminBoard)" style="margin-right: 10px" class="add-to-cart"
+                               href="#" title="Favourite">
                               <i class="fa-solid fa-pen-to-square"></i>
                             </a>
                             <a class="add-to-cart" href="#" title="Favourite">
@@ -309,13 +324,19 @@
 
                         <div class="cart animate-effect">
                           <div class="action">
-                            <a routerLink="/cart" class="add-to-cart" title="Add to Cart">
+                            <a *ngIf="isLoggedIn" style="cursor: pointer" class="add-to-cart" title="Add to Cart">
+                              <i (click)="addBook(bookIntroBestSeller)" class="icon icon-plus fa fa-plus-circle"></i>
+                            </a>
+                            <a *ngIf="!isLoggedIn" style="cursor: pointer" routerLink="/cart" class="add-to-cart" title="Add to Cart">
                               <i class="icon icon-plus fa fa-plus-circle"></i>
                             </a>
-                            <a *ngIf="isLoggedIn && (showAdminBoard)" style="margin-right: 10px" class="add-to-cart" href="#" title="Favourite">
+
+                            <a *ngIf="isLoggedIn && (showAdminBoard)" style="margin-right: 10px" class="add-to-cart"
+                               href="#" title="Favourite">
                               <i class="fa-solid fa-trash"></i>
                             </a>
-                            <a *ngIf="isLoggedIn && (showAdminBoard)" style="margin-right: 10px" class="add-to-cart" href="#" title="Favourite">
+                            <a *ngIf="isLoggedIn && (showAdminBoard)" style="margin-right: 10px" class="add-to-cart"
+                               href="#" title="Favourite">
                               <i class="fa-solid fa-pen-to-square"></i>
                             </a>
                             <a class="add-to-cart" href="#" title="Favourite">
@@ -363,10 +384,10 @@
             </div><!-- /.module-heading -->
 
             <div class="customNavigation">
-              <a (click)="slickModalAuthor.slickGoTo(backBookBestSeller())" href="#"
+              <a (click)="slickModalAuthor.slickGoTo(backAuthor())" href="#"
                  class="btn btn-navigation left-nav-arrow-seller owl-prev next-slide"><i
                 class='icon fa fa-caret-left'></i></a>
-              <a (click)="slickModalAuthor.slickGoTo(nextBookBestSeller())" href="#"
+              <a (click)="slickModalAuthor.slickGoTo(nextAuthor())" href="#"
                  class="btn btn-navigation right-nav-arrow-seller owl-next"><i
                 class='icon fa fa-caret-right'></i></a>
             </div><!-- /.customNavigation -->
@@ -386,7 +407,7 @@
                         </div>
                       </a>
                       <div class="author-details">
-                        <h3 class="author-name text-center"><a href="detail.html">{{author.authorName}}</a></h3>
+                        <h3 class="author-name text-center"><a>{{author.authorName}}</a></h3>
                         <button style="transform: translate(14%);" disabled href="category.html"
                                 class="btn btn-primary btn-view-books">View Books
                         </button>
@@ -408,3 +429,5 @@
     src="../../../assets/images/top-scroll.png"
     alt=""></a>
 </div>
+<notifier-container></notifier-container>
+

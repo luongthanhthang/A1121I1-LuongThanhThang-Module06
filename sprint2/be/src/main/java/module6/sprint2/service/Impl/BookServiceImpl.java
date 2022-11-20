@@ -107,5 +107,10 @@ public class BookServiceImpl implements IBookService {
         return bookRepository.findAllBookListZACategory("%" + categoryId + "%", pageable);
     }
 
+    @Override
+    public Book updateQuantityBook(Book book) {
+        return bookRepository.save(book);
+    }
+
 
 }

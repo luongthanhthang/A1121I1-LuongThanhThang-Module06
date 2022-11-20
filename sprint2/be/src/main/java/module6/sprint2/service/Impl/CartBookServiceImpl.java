@@ -1,5 +1,6 @@
 package module6.sprint2.service.Impl;
 
+import module6.sprint2.entity.cart.Cart;
 import module6.sprint2.entity.cart.CartBook;
 import module6.sprint2.repository.ICartBookRepository;
 import module6.sprint2.service.ICartBookService;
@@ -16,5 +17,15 @@ public class CartBookServiceImpl implements ICartBookService {
     @Override
     public List<CartBook> findAllCartBook(Long id) {
         return cartBookRepository.findAllCartBook(id);
+    }
+
+    @Override
+    public CartBook addBook(CartBook cartBook) {
+        return cartBookRepository.save(cartBook);
+    }
+
+    @Override
+    public CartBook findByCartId(Cart cart) {
+        return cartBookRepository.findByCartId(cart);
     }
 }

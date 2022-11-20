@@ -78,7 +78,7 @@ create table if not exists cart (
 	cart_purchase_date date,
     cart_status bit(1) default 0,
 	cart_account_id bigint,												
-	foreign key (cart_account_id) references `account`(account_id) on update cascade
+	foreign key (cart_account_id) references `account`(account_id)
 );
 
 create table if not exists cart_book (					
@@ -196,8 +196,8 @@ create table if not exists cart_book (
 	INSERT INTO `sprint2`.`cart_book` (`book_id`, `cart_id`) VALUES ('1', '7');
     
     INSERT INTO `sprint2`.`cart` (`cart_quantity`, `cart_total_money`, `cart_status`, `cart_account_id`) VALUES ('5', '22500', b'0', '1');
-	INSERT INTO `sprint2`.`cart` (`cart_quantity`, `cart_total_money`, `cart_status`, `cart_account_id`) VALUES ('6', '32400', b'0', '1');
-	INSERT INTO `sprint2`.`cart` (`cart_quantity`, `cart_total_money`, `cart_status`, `cart_account_id`) VALUES ('7', '41650', b'0', '1');
+	INSERT INTO `sprint2`.`cart` (`cart_quantity`, `cart_total_money`, `cart_status`, `cart_account_id`) VALUES ('4', '21600', b'0', '1');
+	INSERT INTO `sprint2`.`cart` (`cart_quantity`, `cart_total_money`, `cart_status`, `cart_account_id`) VALUES ('3', '17850', b'0', '1');
 	INSERT INTO `sprint2`.`cart` (`cart_quantity`, `cart_total_money`, `cart_status`, `cart_account_id`) VALUES ('2', '13600', b'0', '2');
 	INSERT INTO `sprint2`.`cart` (`cart_quantity`, `cart_total_money`, `cart_status`, `cart_account_id`) VALUES ('3', '21600', b'0', '2');
 	INSERT INTO `sprint2`.`cart` (`cart_quantity`, `cart_total_money`, `cart_status`, `cart_account_id`) VALUES ('4', '32000', b'0', '2');

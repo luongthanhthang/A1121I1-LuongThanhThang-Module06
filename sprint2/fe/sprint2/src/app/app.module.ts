@@ -22,6 +22,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {SlickCarouselModule} from 'ngx-slick-carousel';
 import { BookBestSellerComponent } from './book/book-best-seller/book-best-seller.component';
 import { BookPromotionComponent } from './book/book-promotion/book-promotion.component';
+import {NotifierModule} from 'angular-notifier';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { BookPromotionComponent } from './book/book-promotion/book-promotion.com
     AngularFireModule.initializeApp(environment.firebaseConfig),
     HttpClientModule,
     SlickCarouselModule,
-    FormsModule
+    FormsModule,
+    NotifierModule
   ],
   providers: [HeaderComponent, authInterceptorProviders,
     JwtHelperService,

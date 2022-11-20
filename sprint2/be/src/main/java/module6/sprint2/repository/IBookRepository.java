@@ -32,7 +32,7 @@ public interface IBookRepository extends JpaRepository<Book, Long> {
             "join cart_book on book.book_id = cart_book.book_id\n" +
             "join cart on cart.cart_id = cart_book.cart_id\n" +
             "group by cart_book.book_id \n" +
-            "having sum(cart.cart_quantity) is not null and book.book_flag = 0 and `cart`.cart_status = 1 and `cart_book`.book_id > 0\n" +
+            "having sum(cart.cart_quantity) is not null and book.book_flag = 0 and `cart`.cart_status = 1 and `cart_book`.book_id > 0 and `book`.book_quantity > 0\n" +
             "order by sum(cart.cart_quantity) desc limit 3;", nativeQuery = true)
     List<Book> findAllBookBestSellerIntro();
 

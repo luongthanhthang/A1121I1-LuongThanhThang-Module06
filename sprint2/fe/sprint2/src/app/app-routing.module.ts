@@ -11,6 +11,7 @@ import {BookBestSellerComponent} from './book/book-best-seller/book-best-seller.
 import {BookPromotionComponent} from './book/book-promotion/book-promotion.component';
 import {BothAuthCustomerGuard} from './helpers/both-auth-customer.guard';
 import {ErrorNotFoundComponent} from './security/error/error-not-found/error-not-found.component';
+import {HeaderComponent} from './layout/header/header.component';
 
 
 
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: '', component: BookIntroComponent},
   {path: 'cart', component: BookCartComponent, canActivate: [AuthGuard, BothAuthCustomerGuard]},
   {path: 'book/detail/:id', component: BookDetailComponent},
+  {path: 'header', component: HeaderComponent},
   {path: 'book/list', component: BookListComponent},
   {path: 'book/list/:id', component: BookListComponent},
   {path: 'book/list-best-seller', component: BookBestSellerComponent},

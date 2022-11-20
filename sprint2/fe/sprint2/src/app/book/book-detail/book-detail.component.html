@@ -8,31 +8,31 @@
       </ul><!-- /.breadcrumb -->
 
       <!-- ========================================= BREADCRUMB SEARCH BOX ========================================= -->
-<!--      <ul class="list-unstyled search-box pull-right">-->
-<!--        <li data-target="#search" data-toggle="sub-header">-->
-<!--          <button type="button" class="btn btn-primary-dark search-button"><i class="fa fa-search icon"></i></button>-->
-<!--          <div class="row search-action sub-header" id="search">-->
-<!--            <div class="col-sm-8 col-xs-12 no-padding-right">-->
-<!--              <div class="input-group">-->
-<!--                <span class="input-group-btn"><button class="btn btn-search" type="button"><i-->
-<!--                  class="fa fa-search icon"></i></button></span>-->
-<!--                <input type="text" class="form-control search-book" placeholder="Tìm kiếm sách...">-->
-<!--              </div>&lt;!&ndash; /.input-group &ndash;&gt;-->
-<!--            </div>&lt;!&ndash; /.col &ndash;&gt;-->
+      <!--      <ul class="list-unstyled search-box pull-right">-->
+      <!--        <li data-target="#search" data-toggle="sub-header">-->
+      <!--          <button type="button" class="btn btn-primary-dark search-button"><i class="fa fa-search icon"></i></button>-->
+      <!--          <div class="row search-action sub-header" id="search">-->
+      <!--            <div class="col-sm-8 col-xs-12 no-padding-right">-->
+      <!--              <div class="input-group">-->
+      <!--                <span class="input-group-btn"><button class="btn btn-search" type="button"><i-->
+      <!--                  class="fa fa-search icon"></i></button></span>-->
+      <!--                <input type="text" class="form-control search-book" placeholder="Tìm kiếm sách...">-->
+      <!--              </div>&lt;!&ndash; /.input-group &ndash;&gt;-->
+      <!--            </div>&lt;!&ndash; /.col &ndash;&gt;-->
 
-<!--            <div class="col-sm-4 col-xs-12 select-wrapper" style="padding:0px;">-->
-<!--              <select id="id_select" class="selectpicker">-->
-<!--                <option selected>Thể loại</option>-->
-<!--                <option>Books</option>-->
-<!--                <option>Textbooks</option>-->
-<!--                <option>Audiobooks</option>-->
-<!--                <option>Magazines</option>-->
-<!--                <option>Kids</option>-->
-<!--              </select>-->
-<!--            </div>&lt;!&ndash; /.col &ndash;&gt;-->
-<!--          </div>&lt;!&ndash; /.row &ndash;&gt;-->
-<!--        </li>-->
-<!--      </ul>&lt;!&ndash; /.search-box &ndash;&gt;-->
+      <!--            <div class="col-sm-4 col-xs-12 select-wrapper" style="padding:0px;">-->
+      <!--              <select id="id_select" class="selectpicker">-->
+      <!--                <option selected>Thể loại</option>-->
+      <!--                <option>Books</option>-->
+      <!--                <option>Textbooks</option>-->
+      <!--                <option>Audiobooks</option>-->
+      <!--                <option>Magazines</option>-->
+      <!--                <option>Kids</option>-->
+      <!--              </select>-->
+      <!--            </div>&lt;!&ndash; /.col &ndash;&gt;-->
+      <!--          </div>&lt;!&ndash; /.row &ndash;&gt;-->
+      <!--        </li>-->
+      <!--      </ul>&lt;!&ndash; /.search-box &ndash;&gt;-->
 
       <!-- ========================================= BREADCRUMB SEARCH BOX : END ========================================= -->
 
@@ -87,23 +87,24 @@
 
                 <div class="pull-right col-md-7 col-sm-6 col-xs-12">
                   <div class="row product-actions">
-
-                    <a routerLink="/cart" class="col-sm-6 btn btn-primary btn-addToCart"><i
+                    <a *ngIf="!isLoggedIn" routerLink="/cart" class="col-sm-6 btn btn-primary btn-addToCart"><i
                       class="icon-plus fa fa-plus-circle"></i>Thêm vào giỏ hàng</a>
-                    <div *ngIf="isLoggedIn && (showAdminBoard||showCustomer)" class="quantity book-detail-quantity col-xs-4 col-lg-3">
+                    <a *ngIf="isLoggedIn" (click)="addBook(bookById)" class="col-sm-6 btn btn-primary btn-addToCart"><i
+                      class="icon-plus fa fa-plus-circle"></i>Thêm vào giỏ hàng</a>
+                    <div class="quantity book-detail-quantity col-xs-4 col-lg-3">
                       <div class="quantity-block">
                         <div class="quant-input">
                           <div class="arrows">
-                            <div class="arrow plus gradient"><span class="ir"></span></div>
-                            <div class="arrow minus gradient"><span class="ir"></span></div>
+                            <button class="arrow plus gradient" (click)="addBookQuantity()"><span class="ir"></span></button>
+                            <button class="arrow minus gradient" [disabled]="bookQuantity == 1"  (click)="subBookQuantity()">
+                              <span class="ir"></span></button>
                           </div><!-- /.arrows -->
-                          <input class="txt-quantity" type="text" value="1"/>
+                          <input class="txt-quantity" type="text" (change)="getQuantity($event.target)" value="1"/>
                         </div><!-- /.quant-input -->
                       </div><!-- /.quantity-block -->
                     </div><!-- /.col -->
                     <button title="favourite" class="hidden-xs btn btn-secondary btn-add-to-wishlist col-xs-2 "
                             type="button"><span class="icon glyphicon glyphicon-heart"></span></button>
-
                   </div><!-- /.row -->
                 </div><!-- /.pull-right -->
               </div><!-- /.detail-cart-button -->
@@ -216,7 +217,8 @@
 
 
                     <div class="book-details">
-                      <h3 class="book-title" style="width: 192px; font-size: 20px; height: 66px"><a>{{bookAuthor.bookName}}</a></h3>
+                      <h3 class="book-title" style="width: 192px; font-size: 20px; height: 66px">
+                        <a>{{bookAuthor.bookName}}</a></h3>
                       <p class="book-author">{{bookAuthor.bookAuthorId.authorName}}</p>
                       <p>{{bookAuthor.bookQuantity}} sản phẩm có sẵn</p>
                       <div class="star-rating">
@@ -243,4 +245,5 @@
   <a class="scrollup hidden-xs hidden-sm" href="#" style="display: none;"><img src="assets/images/top-scroll.png"
                                                                                alt=""></a>
 </div>
+<notifier-container></notifier-container>
 

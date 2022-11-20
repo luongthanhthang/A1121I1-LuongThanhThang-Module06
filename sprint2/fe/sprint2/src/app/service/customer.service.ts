@@ -20,7 +20,7 @@ export class CustomerService {
   //   return this.httpClient.get<ICart[]>(this.URI + '/list-cart');
   // }
 
-  findCustomerByAccountId(accountId: number): Observable<ICustomer[]> {
-    return this.httpClient.get<ICustomer[]>(this.URI + '/getCustomerByAccount?accountId=' + accountId);
+  findCustomerByAccountId(accountId: number): Observable<ICustomer> {
+    return this.httpClient.get<ICustomer>(this.URI + '/getCustomerByAccount?accountId=' + accountId);
   }
 }

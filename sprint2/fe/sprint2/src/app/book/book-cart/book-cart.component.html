@@ -47,7 +47,7 @@
       <!--      ==form==-->
       <div class="page-body">
         <div class="order-detail table-responsive">
-          <table class="table table-cart cart-detail" [formGroup]="cartForm">
+          <table class="table table-cart cart-detail">
             <thead>
             <tr>
               <th class="dark"><input type="checkbox" (change)="isAllChecked()" [checked]="checkAll"
@@ -62,7 +62,7 @@
             <tbody class="cart-body-content">
             <tr class="cart-book" *ngFor="let cartBook of cartBookList; let i=index">
               <td>
-                <input type="checkbox" style="margin: 0;" (change)="isChecked(i)"  [checked]="checkList[i]">
+                <input type="checkbox" style="margin: 0;" (change)="isChecked(i)" [checked]="checkList[i]">
                 <div class="media">
                   <a class="cart-thumbnail-image media-left">
                     <div class="book-cover small-book-cover">
@@ -87,36 +87,50 @@
               <td class="quantity text-center">
                 <div class="quant-input ">
                   <div class="arrows">
-                    <div class="arrow plus gradient" (click)="addBook(cartBook)"><span class="ir"></span></div>
-                    <div class="arrow minus gradient" (click)="subBook(cartBook)"><span class="ir"></span></div>
+                    <button class="arrow plus gradient"
+                            [disabled]="cartBook.cartId.cartQuantity >= cartBook.bookId.bookQuantity"
+                            (click)="addBook(cartBook)"><span class="ir"></span></button>
+                    <button class="arrow minus gradient" [disabled]="cartBook.cartId.cartQuantity == 1"
+                            (click)="subBook(cartBook)"><span class="ir"></span></button>
                   </div>
-                  <input class="txt-quantity" type="text" [value]="cartBook.cartId.cartQuantity"/>
+                  <input class="txt-quantity" type="text" (change)="getQuantity($event.target, cartBook)"
+                         [value]="cartBook.cartId.cartQuantity"/>
                 </div>
               </td>
               <td>
                 <span class="price subtotal">{{cartBook.cartId.cartTotalMoney|currency:'VND'}}</span>
               </td>
               <td>
-                <button class="btn btn-primary-light btn-flat" type="button">X</button>
+                <button (click)="showInfoCartDelete(cartBook)"
+                        data-toggle="modal"
+                        data-target="#modalDeleteCart" class="btn btn-primary-light btn-flat" type="button">X
+                </button>
               </td>
             </tr>
             </tbody><!-- /.cart-body-content -->
           </table><!-- /.table -->
         </div><!-- /.order-detail -->
         <div class="row">
-
-          <div class="col-xs-12 col-sm-4 center-sm">
-            <input type="text" class="form-control discount-name" placeholder="Nhập phiếu giảm giá của bạn...">
+          <div class="col-xs-12 col-sm-4 center-sm" style="border-style: outset">
+            <h2 style="font-weight: bold">Giao tới</h2>
+            <hr>
+            <span style="color: black; font-weight: bold; font-size: 18px">{{customer.customerName}}</span>
+            &nbsp;&nbsp;<span style="font-size: 20px">|</span>&nbsp;&nbsp;
+            <span
+              style="color: black; font-weight: bold; font-size: 18px">Số điện thoại: {{customer.customerPhone}}</span>
+            <p></p>
+            <p style="font-size: 18px">Địa chỉ: {{customer.customerAddress}}</p>
+            <p style="font-size: 18px">Email: {{customer.customerEmail}}</p>
           </div><!-- /.col -->
 
           <div class="col-xs-12 col-sm-8 center-sm">
             <div class="table-responsive">
               <table class="table table-cart">
                 <tfoot>
-                <!--                <tr>-->
-                <!--                  <td ><i class="icon-chevron fa fa-chevron-right"></i>&nbsp;Tổng tiền</td>-->
-                <!--                  <td >$ 20.00</td>-->
-                <!--                </tr>-->
+                <tr *ngIf="(totalMoneyBeforePromotion - totalMoney) > 0">
+                  <td><i class="icon-chevron fa fa-chevron-right"></i>&nbsp;Tiết kiệm</td>
+                  <td>{{totalMoneyBeforePromotion - totalMoney | currency:'VND'}}</td>
+                </tr>
 
                 <tr>
                   <td><i class="icon-chevron fa fa-chevron-right"></i>&nbsp;Tổng tiền</td>
@@ -127,7 +141,7 @@
             </div><!-- /table-responsive -->
           </div><!-- /.col -->
           <div class="col-md-12">
-            <a href="checkout.html" class="pull-right btn btn-primary btn-checkout">Tiến hành thanh toán &nbsp;<i
+            <a class="pull-right btn btn-primary btn-checkout" (click)="payment()">Tiến hành thanh toán &nbsp;<i
               class="fa fa-chevron-right"></i></a>
           </div>
 
@@ -135,5 +149,33 @@
       </div><!-- /.page-body -->
     </div><!-- /.container -->
   </div><!-- /.cart page --> <a class="scrollup hidden-xs hidden-sm" href="#" style="display: none;"><img
-  src="assets/images/top-scroll.png" alt=""></a>
+  src="../../../assets/images/top-scroll.png" alt=""></a>
 </div>
+
+<!-- ========Modal========== -->
+<div class="modal fade" id="modalDeleteCart" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h3 class="modal-title" id="exampleModalLabel" style="font-weight: 500; color: crimson">Bạn chắc chắn muốn bỏ
+          sản phẩm này?</h3>
+      </div>
+      <div class="modal-body">
+        <h1 style="color: #4b7838; font-weight: bolder">{{cartDelete.bookId.bookName}}</h1>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary-light btn-flat" data-dismiss="modal"
+                (click)="deleteCart(cartDelete.cartBookId)">Xóa
+        </button>
+        <button style="background: gray" type="button" class="btn btn-primary-light btn-flat"
+                data-dismiss="modal">Huỷ
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<notifier-container></notifier-container>

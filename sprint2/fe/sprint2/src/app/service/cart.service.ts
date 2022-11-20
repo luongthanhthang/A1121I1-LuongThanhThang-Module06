@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {ICart} from '../model/cart/ICart';
 import {ICartBook} from '../model/cart/ICartBook';
+import {IBook} from '../model/book/IBook';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,17 @@ export class CartService {
 
   updateQuantityCart(cartBook: ICartBook): Observable<void> {
     return this.httpClient.put<void>(this.URI + '/update-quantity', cartBook);
+  }
+
+  addBook(accountId: number, book: IBook): Observable<void> {
+    return this.httpClient.post<void>(this.URI + '/add-book?accountId=' + accountId, book);
+  }
+
+  deleteBookCart(cartId: number): Observable<void> {
+    return this.httpClient.delete<void>(this.URI + '/cart-delete?cardId=' + cartId);
+  }
+
+  paymentCart(cartList: ICart[]): Observable<void> {
+    return this.httpClient.put<void>(this.URI + '/payment', cartList);
   }
 }

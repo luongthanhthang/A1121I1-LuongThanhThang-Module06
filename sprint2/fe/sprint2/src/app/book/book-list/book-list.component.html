@@ -108,9 +108,13 @@
 
                             <div class="cart animate-effect">
                               <div class="action">
-                                <a routerLink="/cart" class="add-to-cart" title="Add to Cart">
+                                <a *ngIf="isLoggedIn" style="cursor: pointer" class="add-to-cart" title="Add to Cart">
+                                  <i (click)="addBook(book)" class="icon icon-plus fa fa-plus-circle"></i>
+                                </a>
+                                <a *ngIf="!isLoggedIn" style="cursor: pointer" routerLink="/cart" class="add-to-cart" title="Add to Cart">
                                   <i class="icon icon-plus fa fa-plus-circle"></i>
                                 </a>
+
                                 <a *ngIf="isLoggedIn && (showAdminBoard)" style="margin-right: 10px" class="add-to-cart" href="#" title="Favourite">
                                   <i class="fa-solid fa-trash"></i>
                                 </a>
@@ -189,8 +193,13 @@
                           <p class="hidden-sm hidden-md">{{book2.bookContent}}</p>
                         </div><!-- /.featured-book-content -->
                         <div class="actions">
-                          <a routerLink="/cart" class="add-to-cart" title="Add to Cart"><i
-                            class="icon-plus fa fa-plus-circle"></i></a>
+                          <a *ngIf="isLoggedIn" style="cursor: pointer" class="add-to-cart" title="Add to Cart">
+                            <i (click)="addBook(book2)" class="icon icon-plus fa fa-plus-circle"></i>
+                          </a>
+                          <a *ngIf="!isLoggedIn" style="cursor: pointer" routerLink="/cart" class="add-to-cart" title="Add to Cart">
+                            <i class="icon icon-plus fa fa-plus-circle"></i>
+                          </a>
+
                           <a *ngIf="isLoggedIn && (showAdminBoard)" style="margin: 26px;" class="add-to-cart" href="#" title="Favourite">
                             <i class="fa-solid fa-trash"></i>
                           </a>
@@ -258,3 +267,5 @@
   <a class="scrollup hidden-xs hidden-sm" href="#" style="display: none;"><img src="../../../assets/images/top-scroll.png"
                                                                                alt=""></a>
 </div>
+<notifier-container></notifier-container>
+

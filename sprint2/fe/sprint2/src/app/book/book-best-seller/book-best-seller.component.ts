@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IBook} from '../../model/book/IBook';
 import {BookService} from '../../service/book.service';
 import {ActivatedRoute} from '@angular/router';
 import {ICategory} from '../../model/book/ICategory';
 import {TokenStorageService} from '../../service/security/token-storage.service';
+import {CartService} from '../../service/cart.service';
+import {NotifierService} from 'angular-notifier';
 
 @Component({
   selector: 'app-book-best-seller',
@@ -32,9 +34,14 @@ export class BookBestSellerComponent implements OnInit {
   showCustomer = false;
   userName: string;
 
+  accountId: number;
+
   constructor(private bookService: BookService,
               private activatedRoute: ActivatedRoute,
-              private tokenStorageService: TokenStorageService) { }
+              private cartService: CartService,
+              private notification: NotifierService,
+              private tokenStorageService: TokenStorageService) {
+  }
 
   ngOnInit(): void {
     this.findAllBookList(0);
@@ -51,8 +58,22 @@ export class BookBestSellerComponent implements OnInit {
 
       console.log('roles: ' + this.roles);
     }
+
+    this.accountId = this.tokenStorageService.getUser().account.accountId;
   }
 
+  // thêm sách vào giỏ hàng
+  addBook(bookAdd: IBook) {
+    bookAdd.bookQuantity = 1;
+    this.cartService.addBook(this.accountId, bookAdd).subscribe(() => {
+    }, (error) => {
+      this.notification.notify('error', error.error);
+    }, () => {
+      this.notification.notify('success', 'Thêm sách vào giỏ hàng thành công');
+    });
+  }
+
+  // ===list===
   findAllBookList(page: number) {
     this.page = page;
     this.bookService.findAllBookBestSellerList(this.page).subscribe((data: any) => {

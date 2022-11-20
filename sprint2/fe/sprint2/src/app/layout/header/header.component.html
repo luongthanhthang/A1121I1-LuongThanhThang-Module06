@@ -55,14 +55,14 @@
             <!--            ====chưa login===-->
             <li class="dropdown yamm-fw active" *ngIf="!isLoggedIn"></li>
             <!--            ====đã login===-->
-<!--            <li class="dropdown yamm-fw active" *ngIf="isLoggedIn && showAdminBoard">-->
-<!--              <a routerLink="/book/list" data-toggle="dropdown" data-hover="dropdown"-->
-<!--                 class="dropdown-toggle trigger">Danh mục sách<b class="caret"></b></a>-->
-<!--              <ul class="dropdown-menu pages-dropdown">-->
-<!--                <li *ngFor="let category of categoryList"><a-->
-<!--                  [routerLink]="['/book/list', category.categoryId]">{{category.categoryName}}</a></li>-->
-<!--              </ul>&lt;!&ndash; /.dropdown-menu &ndash;&gt;-->
-<!--            </li>-->
+            <!--            <li class="dropdown yamm-fw active" *ngIf="isLoggedIn && showAdminBoard">-->
+            <!--              <a routerLink="/book/list" data-toggle="dropdown" data-hover="dropdown"-->
+            <!--                 class="dropdown-toggle trigger">Danh mục sách<b class="caret"></b></a>-->
+            <!--              <ul class="dropdown-menu pages-dropdown">-->
+            <!--                <li *ngFor="let category of categoryList"><a-->
+            <!--                  [routerLink]="['/book/list', category.categoryId]">{{category.categoryName}}</a></li>-->
+            <!--              </ul>&lt;!&ndash; /.dropdown-menu &ndash;&gt;-->
+            <!--            </li>-->
 
             <!--            <li class="dropdown">-->
             <!--              <a href="category.html" data-toggle="dropdown" data-hover="dropdown"-->
@@ -81,7 +81,8 @@
         <!--        ==========Giỏ hàng=========-->
         <a *ngIf="isLoggedIn && (showAdminBoard||showCustomer)" routerLink="/cart" class="navbar-btn btn btn-cart"
            data-toggle="collapse"><img
-          src="../../../assets/images/shopping-cart.png" alt=""/><span class="badge-cart-items-count">4</span></a>
+          src="../../../assets/images/shopping-cart.png" alt=""/><span
+          class="badge-cart-items-count">{{totalQuantityCart}}</span></a>
       </div><!-- /.header-mast -->
       <!-- ============================================================= NAVBAR PRIMARY : END ============================================================= -->
     </div><!-- /.container -->

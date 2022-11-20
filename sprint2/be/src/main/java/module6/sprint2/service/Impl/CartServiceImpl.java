@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CartServiceImpl implements ICartService {
@@ -21,5 +22,30 @@ public class CartServiceImpl implements ICartService {
     @Override
     public void updateQuantityCart(Integer cartQuantity, Double cartTotalMoney, Long cartId) {
         cartRepository.updateQuantityCart(cartQuantity, cartTotalMoney, cartId);
+    }
+
+    @Override
+    public Cart addBook(Cart cart) {
+        return cartRepository.save(cart);
+    }
+
+    @Override
+    public Optional<Cart> findById(Long cardId) {
+        return cartRepository.findById(cardId);
+    }
+
+    @Override
+    public void deleteCartById(Long cartId) {
+        cartRepository.deleteById(cartId);
+    }
+
+    @Override
+    public void paymentCart(String cartCode, String cartPurchaseDate, Boolean cartStatus, Long cartId) {
+        cartRepository.paymentCart(cartCode, cartPurchaseDate, cartStatus, cartId);
+    }
+
+    @Override
+    public List<String> checkCodeCart() {
+        return cartRepository.checkCodeCart();
     }
 }

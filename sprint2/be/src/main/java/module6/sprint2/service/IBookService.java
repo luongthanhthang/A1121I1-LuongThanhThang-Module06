@@ -43,4 +43,7 @@ public interface IBookService {
     Page<Book> findAllBookListAZCategory(Integer categoryId, Pageable pageable);
 
     Page<Book> findAllBookListZACategory(Integer categoryId, Pageable pageable);
+
+    //payment
+    Book updateQuantityBook(Book book);
 }

@@ -4,6 +4,9 @@ import {IBook} from '../../model/book/IBook';
 import {IAuthor} from '../../model/book/IAuthor';
 import {ICategory} from '../../model/book/ICategory';
 import {TokenStorageService} from '../../service/security/token-storage.service';
+import {CartService} from '../../service/cart.service';
+import {NotifierService} from 'angular-notifier';
+import {ICartBook} from '../../model/cart/ICartBook';
 
 @Component({
   selector: 'app-book-intro',
@@ -27,14 +30,18 @@ export class BookIntroComponent implements OnInit {
   showCustomer = false;
   userName: string;
 
+  accountId: number;
 
   constructor(
     private bookService: BookService,
+    private cartService: CartService,
+    private notification: NotifierService,
     private tokenStorageService: TokenStorageService
   ) {
   }
 
   ngOnInit(): void {
+    this.topFunction();
     this.findAllBookIntro();
     this.findAllBookBestSellerIntro();
     this.findAllBookBestSeller();
@@ -58,6 +65,8 @@ export class BookIntroComponent implements OnInit {
 
       console.log('roles: ' + this.roles);
     }
+
+    this.accountId = this.tokenStorageService.getUser().account.accountId;
   }
 
   // +++++++++++++++lấy dữ liệu++++++++++++++++
@@ -88,6 +97,17 @@ export class BookIntroComponent implements OnInit {
   findAllCategory() {
     this.bookService.findAllCategory().subscribe((data: ICategory[]) => {
       this.categoryList = data;
+    });
+  }
+
+  // thêm sách vào giỏ hàng
+  addBook(bookAdd: IBook) {
+    bookAdd.bookQuantity = 1;
+    this.cartService.addBook(this.accountId, bookAdd).subscribe(() => {
+    }, (error) => {
+      this.notification.notify('error', error.error);
+    }, () => {
+      this.notification.notify('success', 'Thêm sách vào giỏ hàng thành công');
     });
   }
 
@@ -152,5 +172,10 @@ export class BookIntroComponent implements OnInit {
     }
     this.pageAuthor += 4;
     return this.pageAuthor;
+  }
+
+  topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
   }
 }

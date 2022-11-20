@@ -3,6 +3,8 @@ import {BookService} from '../../service/book.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {IBook} from '../../model/book/IBook';
 import {TokenStorageService} from '../../service/security/token-storage.service';
+import {CartService} from '../../service/cart.service';
+import {NotifierService} from 'angular-notifier';
 
 @Component({
   selector: 'app-book-detail',
@@ -22,10 +24,15 @@ export class BookDetailComponent implements OnInit {
   showCustomer = false;
   userName: string;
 
+  accountId: number;
+  bookQuantity = 1;
+
 
   constructor(
     private tokenStorageService: TokenStorageService,
     private bookService: BookService,
+    private cartService: CartService,
+    private notification: NotifierService,
     private router: Router,
     private activatedRoute: ActivatedRoute
   ) {
@@ -60,8 +67,22 @@ export class BookDetailComponent implements OnInit {
     }
 
     this.findAllBookAuthor();
+
+    this.accountId = this.tokenStorageService.getUser().account.accountId;
   }
 
+  // thêm sách vào giỏ hàng
+  addBook(bookAdd: IBook) {
+    bookAdd.bookQuantity = this.bookQuantity;
+    this.cartService.addBook(this.accountId, bookAdd).subscribe(() => {
+    }, (error) => {
+      this.notification.notify('error', error.error);
+    }, () => {
+      this.notification.notify('success', 'Thêm sách vào giỏ hàng thành công');
+    });
+  }
+
+  // ========list======
   findAllBookAuthor() {
     this.bookService.findBookById(this.id).subscribe((data: IBook) => {
       this.bookById = data;
@@ -69,9 +90,7 @@ export class BookDetailComponent implements OnInit {
     }, () => {
       this.bookService.findAllBookAuthor(this.bookById.bookAuthorId.authorId, this.id).subscribe((data: IBook[]) => {
         this.bookAuthorList = data;
-        console.log(this.bookAuthorList);
-      }, (error) => {
-        console.log(error);
+      }, () => {
       });
     });
   }
@@ -98,5 +117,17 @@ export class BookDetailComponent implements OnInit {
   topFunction() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 200;
+  }
+
+  addBookQuantity() {
+    this.bookQuantity = this.bookQuantity + 1;
+  }
+
+  subBookQuantity() {
+    this.bookQuantity = this.bookQuantity - 1;
+  }
+
+  getQuantity(quantity: any) {
+    this.bookQuantity = quantity.value;
   }
 }

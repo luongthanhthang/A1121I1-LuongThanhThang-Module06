@@ -4,6 +4,8 @@ import {Router} from '@angular/router';
 import {BookService} from '../../service/book.service';
 import {IBook} from '../../model/book/IBook';
 import {ICategory} from '../../model/book/ICategory';
+import {ICartBook} from '../../model/cart/ICartBook';
+import {CartService} from '../../service/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -20,8 +22,13 @@ export class HeaderComponent implements OnInit {
 
   categoryList: ICategory[] = [];
 
+  accountId: number;
+
+  totalQuantityCart = 0;
+
   constructor(private tokenStorageService: TokenStorageService,
               private router: Router,
+              private cartService: CartService,
               private bookService: BookService) {
   }
 
@@ -38,6 +45,9 @@ export class HeaderComponent implements OnInit {
 
       console.log('roles: ' + this.roles);
     }
+
+    this.accountId = this.tokenStorageService.getUser().account.accountId;
+    this.getQuantityCart();
   }
 
   logout() {
@@ -50,6 +60,14 @@ export class HeaderComponent implements OnInit {
   findAllCategory() {
     this.bookService.findAllCategory().subscribe((data: ICategory[]) => {
       this.categoryList = data;
+    });
+  }
+  // === giỏ hàng ===
+  getQuantityCart() {
+    this.cartService.findAllCartBook(this.accountId).subscribe((data: ICartBook[]) => {
+      data.forEach((cartBook) => {
+        this.totalQuantityCart += cartBook.cartId.cartQuantity;
+      });
     });
   }
 }

@@ -6,6 +6,8 @@ import {TokenStorageService} from '../../service/security/token-storage.service'
 import {CustomerService} from '../../service/customer.service';
 import {FormControl, FormGroup} from '@angular/forms';
 import {element} from 'protractor';
+import {NotifierService} from 'angular-notifier';
+import {ICustomer} from '../../model/customer/ICustomer';
 
 @Component({
   selector: 'app-book-cart',
@@ -14,7 +16,7 @@ import {element} from 'protractor';
 })
 export class BookCartComponent implements OnInit {
   // cartList: ICart[] = [];
-  cartForm: FormGroup;
+  // cartForm: FormGroup;
   cartBookList: ICartBook[] = [];
   accountId: number;
   checkList: boolean[] = [];
@@ -22,19 +24,34 @@ export class BookCartComponent implements OnInit {
   money = 0.0;
   totalMoney = 0.0;
 
+  moneyBeforePromotion = 0.0;
+  totalMoneyBeforePromotion = 0.0;
+
+  cartDelete: ICartBook = {
+    cartId: {},
+    bookId: {}
+  };
+
+  customer: ICustomer = {};
+  cartPaymentList: ICart[] = [];
+
   constructor(
     private tokenStorageService: TokenStorageService,
     private cartService: CartService,
+    private notification: NotifierService,
     private customerService: CustomerService
   ) {
   }
 
   ngOnInit(): void {
     this.accountId = this.tokenStorageService.getUser().account.accountId;
-    this.findAllCartBook();
-    this.cartForm = new FormGroup({
-      quantity: new FormControl(2)
+    this.customerService.findCustomerByAccountId(this.accountId).subscribe((data: ICustomer) => {
+      this.customer = data;
+    }, () => {
+    }, () => {
     });
+
+    this.findAllCartBook();
 
     this.getTotalMoney();
   }
@@ -46,7 +63,6 @@ export class BookCartComponent implements OnInit {
         this.checkList.push(false);
       }
     });
-
   }
 
   // ====thêm, giảm sản phẩm====
@@ -107,10 +123,58 @@ export class BookCartComponent implements OnInit {
           this.money += this.cartBookList[index].bookId.bookPrice * this.cartBookList[index].cartId.cartQuantity
             - (this.cartBookList[index].bookId.bookPrice * this.cartBookList[index].cartId.cartQuantity
               * (this.cartBookList[index].bookId.bookPromotionId.promotionPercent / 100));
+
+          this.moneyBeforePromotion += this.cartBookList[index].bookId.bookPrice * this.cartBookList[index].cartId.cartQuantity;
         }
       });
       this.totalMoney = this.money;
       this.money = 0.0;
+
+      this.totalMoneyBeforePromotion = this.moneyBeforePromotion;
+      this.moneyBeforePromotion = 0.0;
+    });
+  }
+
+  getQuantity(quantity: any, cartBook: ICartBook) {
+    cartBook.cartId.cartQuantity = quantity.value;
+    this.cartService.updateQuantityCart(cartBook).subscribe(data => {
+    }, () => {
+    }, () => {
+      this.findAllCartBook();
+      this.getTotalMoney();
+    });
+  }
+
+  // =======xoá===
+  showInfoCartDelete(cartBookDelete: ICartBook) {
+    this.cartDelete = cartBookDelete;
+  }
+
+  deleteCart(cartBookId: number) {
+    this.cartService.deleteBookCart(cartBookId).subscribe(
+      () => {
+      },
+      () => {
+      },
+      () => {
+        this.findAllCartBook();
+        // this.getImportListNotPagination();
+        this.notification.notify('success', 'Xoá sản phẩm thành công');
+      });
+  }
+
+  payment() {
+    this.cartBookList.forEach((check, index) => {
+      if (this.checkList[index]) {
+        this.cartPaymentList.push(this.cartBookList[index].cartId);
+      }
+    });
+
+    this.cartService.paymentCart(this.cartPaymentList).subscribe(data => {
+    }, () => {
+    }, () => {
+      this.notification.notify('success', 'Thanh toán thành công');
+      window.location.assign('/cart');
     });
   }
 }

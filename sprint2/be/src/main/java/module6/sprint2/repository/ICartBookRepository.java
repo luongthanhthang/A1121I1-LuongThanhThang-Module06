@@ -1,5 +1,6 @@
 package module6.sprint2.repository;
 
+import module6.sprint2.entity.cart.Cart;
 import module6.sprint2.entity.cart.CartBook;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,4 +17,6 @@ public interface ICartBookRepository extends JpaRepository<CartBook, Long> {
             "having `cart_book`.book_id > 0 and `cart`.cart_status = 0 and `cart`.cart_account_id = ?1\n" +
             ";", nativeQuery = true)
     List<CartBook> findAllCartBook(Long id);
+
+    CartBook findByCartId(Cart cart);
 }
