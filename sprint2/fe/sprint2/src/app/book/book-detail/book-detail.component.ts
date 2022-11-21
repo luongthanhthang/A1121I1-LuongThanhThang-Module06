@@ -5,6 +5,9 @@ import {IBook} from '../../model/book/IBook';
 import {TokenStorageService} from '../../service/security/token-storage.service';
 import {CartService} from '../../service/cart.service';
 import {NotifierService} from 'angular-notifier';
+import {ICartBook} from '../../model/cart/ICartBook';
+import {ICart} from '../../model/cart/ICart';
+import {HeaderComponent} from '../../layout/header/header.component';
 
 @Component({
   selector: 'app-book-detail',
@@ -13,7 +16,7 @@ import {NotifierService} from 'angular-notifier';
 })
 export class BookDetailComponent implements OnInit {
   id: number;
-  bookById: IBook = null;
+  bookById: IBook = {};
   slideConfig = {slidesToShow: 4, slidesToScroll: 4};
   bookAuthorList: IBook[] = [];
   pageBookAuthorList = 0;
@@ -27,6 +30,7 @@ export class BookDetailComponent implements OnInit {
   accountId: number;
   bookQuantity = 1;
 
+  quantityCart = 0;
 
   constructor(
     private tokenStorageService: TokenStorageService,
@@ -34,7 +38,8 @@ export class BookDetailComponent implements OnInit {
     private cartService: CartService,
     private notification: NotifierService,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private headerComponent: HeaderComponent
   ) {
   }
 
@@ -52,7 +57,14 @@ export class BookDetailComponent implements OnInit {
       this.id = +(param.get('id'));
     }, () => {
     }, () => {
+      this.bookService.findBookById(this.id).subscribe((data: IBook) => {
+        this.bookById = data;
+      }, () => {
+      }, () => {
+      });
     });
+
+    this.getQuantityCart();
 
     // kiểm tra đăng nhập
     this.isLoggedIn = !!this.tokenStorageService.getToken();
@@ -73,12 +85,39 @@ export class BookDetailComponent implements OnInit {
 
   // thêm sách vào giỏ hàng
   addBook(bookAdd: IBook) {
+    // lấy số lượng trong giỏ hàng
+    this.getQuantityCart();
+
+    // thêm vào giỏ hàng
     bookAdd.bookQuantity = this.bookQuantity;
     this.cartService.addBook(this.accountId, bookAdd).subscribe(() => {
     }, (error) => {
       this.notification.notify('error', error.error);
+      this.bookService.findBookById(this.id).subscribe((data: IBook) => {
+        this.bookById = data;
+      }, () => {
+      }, () => {
+      });
     }, () => {
       this.notification.notify('success', 'Thêm sách vào giỏ hàng thành công');
+      (document.getElementById('input-quantity') as HTMLFormElement).value = '1';
+      this.headerComponent.getQuantityCart();
+
+      this.bookService.findBookById(this.id).subscribe((data: IBook) => {
+        this.bookById = data;
+      }, () => {
+      }, () => {
+      });
+    });
+  }
+
+  // lấy số lượng trong giỏ hàng
+  getQuantityCart() {
+    this.cartService.findCartBookByBookId(this.accountId, this.id).subscribe((data: ICartBook) => {
+      this.quantityCart = data.cartId.cartQuantity;
+    }, () => {
+      this.quantityCart = 0;
+    }, () => {
     });
   }
 
@@ -121,13 +160,25 @@ export class BookDetailComponent implements OnInit {
 
   addBookQuantity() {
     this.bookQuantity = this.bookQuantity + 1;
+    // lấy số lượng trong giỏ hàng
+    this.getQuantityCart();
   }
 
   subBookQuantity() {
     this.bookQuantity = this.bookQuantity - 1;
+    // lấy số lượng trong giỏ hàng
+    this.getQuantityCart();
   }
 
   getQuantity(quantity: any) {
     this.bookQuantity = quantity.value;
+    // lấy số lượng trong giỏ hàng
+    this.getQuantityCart();
+
+    // số lượng tối đa mua được
+    if ((this.quantityCart + this.bookQuantity) > this.bookById.bookQuantity) {
+      (document.getElementById('input-quantity') as HTMLFormElement).value = (this.bookById.bookQuantity - this.quantityCart).toString();
+      this.notification.notify('warning', 'Số lượng muốn mua đã vượt quá số lượng sách có trong kho');
+    }
   }
 }

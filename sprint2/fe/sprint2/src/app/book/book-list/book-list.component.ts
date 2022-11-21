@@ -7,6 +7,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {TokenStorageService} from '../../service/security/token-storage.service';
 import {CartService} from '../../service/cart.service';
 import {NotifierService} from 'angular-notifier';
+import {HeaderComponent} from '../../layout/header/header.component';
 
 @Component({
   selector: 'app-book-list',
@@ -48,7 +49,8 @@ export class BookListComponent implements OnInit {
     private cartService: CartService,
     private notification: NotifierService,
     private tokenStorageService: TokenStorageService,
-    private router: Router
+    private router: Router,
+    private headerComponent: HeaderComponent
   ) {
   }
 
@@ -97,9 +99,7 @@ export class BookListComponent implements OnInit {
       this.notification.notify('error', error.error);
     }, () => {
       this.notification.notify('success', 'Thêm sách vào giỏ hàng thành công');
-      // this.router.navigateByUrl('/header', { skipLocationChange: true }).then(() => {
-      //   this.router.navigateByUrl('/book/list');
-      // });
+      this.headerComponent.getQuantityCart();
     });
   }
 
@@ -113,7 +113,6 @@ export class BookListComponent implements OnInit {
     this.page = page;
     this.bookService.findAllBookListCategory(this.page, this.formSearch.get('nameSearch').value, this.categoryId).subscribe((data: any) => {
       this.bookList = data.content;
-      console.log(this.page);
       this.totalPages = data.totalPages;
       this.size = data.size;
 

@@ -39,4 +39,9 @@ export class CartService {
   paymentCart(cartList: ICart[]): Observable<void> {
     return this.httpClient.put<void>(this.URI + '/payment', cartList);
   }
+
+  // book-detail
+  findCartBookByBookId(accountId: number, bookId: number): Observable<ICartBook> {
+    return this.httpClient.get<ICartBook>(this.URI + '/cart-book-detail?accountId=' + accountId + '&bookId=' + bookId);
+  }
 }

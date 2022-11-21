@@ -95,11 +95,11 @@
                       <div class="quantity-block">
                         <div class="quant-input">
                           <div class="arrows">
-                            <button class="arrow plus gradient" (click)="addBookQuantity()"><span class="ir"></span></button>
+                            <button class="arrow plus gradient" [disabled]="(quantityCart + bookQuantity) >= bookById.bookQuantity" (click)="addBookQuantity()"><span class="ir"></span></button>
                             <button class="arrow minus gradient" [disabled]="bookQuantity == 1"  (click)="subBookQuantity()">
                               <span class="ir"></span></button>
                           </div><!-- /.arrows -->
-                          <input class="txt-quantity" type="text" (change)="getQuantity($event.target)" value="1"/>
+                          <input id="input-quantity" class="txt-quantity" type="text" (change)="getQuantity($event.target)" value="1"/>
                         </div><!-- /.quant-input -->
                       </div><!-- /.quantity-block -->
                     </div><!-- /.col -->

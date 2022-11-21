@@ -75,6 +75,7 @@
                     <h3 class="media-heading"><a style="cursor: pointer"
                                                  [routerLink]="['/book/detail', cartBook.bookId.bookId]">{{cartBook.bookId.bookName}}</a>
                     </h3>
+                    <p style="font-size: 12px; text-transform: lowercase; font-family: sans-serif">{{cartBook.bookId.bookQuantity}} sản phẩm có sẵn</p>
                   </div>
                 </div>
               </td>
@@ -90,11 +91,15 @@
                     <button class="arrow plus gradient"
                             [disabled]="cartBook.cartId.cartQuantity >= cartBook.bookId.bookQuantity"
                             (click)="addBook(cartBook)"><span class="ir"></span></button>
-                    <button class="arrow minus gradient" [disabled]="cartBook.cartId.cartQuantity == 1"
+                    <button class="arrow minus gradient" *ngIf="cartBook.cartId.cartQuantity != 1"
                             (click)="subBook(cartBook)"><span class="ir"></span></button>
+<!--                     button xoá-->
+                    <button class="arrow minus gradient" *ngIf="cartBook.cartId.cartQuantity == 1"
+                            (click)="showInfoCartDelete(cartBook)"
+                            data-toggle="modal" data-target="#modalDeleteCart"><span class="ir"></span></button>
                   </div>
                   <input class="txt-quantity" type="text" (change)="getQuantity($event.target, cartBook)"
-                         [value]="cartBook.cartId.cartQuantity"/>
+                         [value]="cartBook.cartId.cartQuantity" readonly/>
                 </div>
               </td>
               <td>

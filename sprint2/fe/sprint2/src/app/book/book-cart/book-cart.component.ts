@@ -8,6 +8,7 @@ import {FormControl, FormGroup} from '@angular/forms';
 import {element} from 'protractor';
 import {NotifierService} from 'angular-notifier';
 import {ICustomer} from '../../model/customer/ICustomer';
+import {HeaderComponent} from '../../layout/header/header.component';
 
 @Component({
   selector: 'app-book-cart',
@@ -39,11 +40,14 @@ export class BookCartComponent implements OnInit {
     private tokenStorageService: TokenStorageService,
     private cartService: CartService,
     private notification: NotifierService,
-    private customerService: CustomerService
+    private customerService: CustomerService,
+    private headerComponent: HeaderComponent
   ) {
   }
 
   ngOnInit(): void {
+    this.topFunction();
+
     this.accountId = this.tokenStorageService.getUser().account.accountId;
     this.customerService.findCustomerByAccountId(this.accountId).subscribe((data: ICustomer) => {
       this.customer = data;
@@ -73,6 +77,7 @@ export class BookCartComponent implements OnInit {
     }, () => {
       this.findAllCartBook();
       this.getTotalMoney();
+      this.headerComponent.getQuantityCart();
     });
   }
 
@@ -83,6 +88,7 @@ export class BookCartComponent implements OnInit {
     }, () => {
       this.findAllCartBook();
       this.getTotalMoney();
+      this.headerComponent.getQuantityCart();
     });
   }
 
@@ -158,7 +164,8 @@ export class BookCartComponent implements OnInit {
       },
       () => {
         this.findAllCartBook();
-        // this.getImportListNotPagination();
+        window.location.assign('/cart');
+        this.headerComponent.getQuantityCart();
         this.notification.notify('success', 'Xoá sản phẩm thành công');
       });
   }
@@ -176,5 +183,10 @@ export class BookCartComponent implements OnInit {
       this.notification.notify('success', 'Thanh toán thành công');
       window.location.assign('/cart');
     });
+  }
+
+  topFunction() {
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 200;
   }
 }

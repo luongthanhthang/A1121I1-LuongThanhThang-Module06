@@ -7,6 +7,7 @@ import {TokenStorageService} from '../../service/security/token-storage.service'
 import {CartService} from '../../service/cart.service';
 import {NotifierService} from 'angular-notifier';
 import {ICartBook} from '../../model/cart/ICartBook';
+import {HeaderComponent} from '../../layout/header/header.component';
 
 @Component({
   selector: 'app-book-intro',
@@ -36,7 +37,8 @@ export class BookIntroComponent implements OnInit {
     private bookService: BookService,
     private cartService: CartService,
     private notification: NotifierService,
-    private tokenStorageService: TokenStorageService
+    private tokenStorageService: TokenStorageService,
+    private headerComponent: HeaderComponent
   ) {
   }
 
@@ -108,6 +110,7 @@ export class BookIntroComponent implements OnInit {
       this.notification.notify('error', error.error);
     }, () => {
       this.notification.notify('success', 'Thêm sách vào giỏ hàng thành công');
+      this.headerComponent.getQuantityCart();
     });
   }
 

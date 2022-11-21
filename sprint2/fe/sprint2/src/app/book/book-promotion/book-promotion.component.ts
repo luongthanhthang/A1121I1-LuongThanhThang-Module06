@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IBook} from '../../model/book/IBook';
 import {ICategory} from '../../model/book/ICategory';
 import {BookService} from '../../service/book.service';
@@ -6,6 +6,7 @@ import {ActivatedRoute} from '@angular/router';
 import {TokenStorageService} from '../../service/security/token-storage.service';
 import {CartService} from '../../service/cart.service';
 import {NotifierService} from 'angular-notifier';
+import {HeaderComponent} from '../../layout/header/header.component';
 
 @Component({
   selector: 'app-book-promotion',
@@ -40,7 +41,9 @@ export class BookPromotionComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private cartService: CartService,
               private notification: NotifierService,
-              private tokenStorageService: TokenStorageService) { }
+              private tokenStorageService: TokenStorageService,
+              private headerComponent: HeaderComponent) {
+  }
 
   ngOnInit(): void {
     this.findAllBookList(0);
@@ -69,6 +72,7 @@ export class BookPromotionComponent implements OnInit {
       this.notification.notify('error', error.error);
     }, () => {
       this.notification.notify('success', 'Thêm sách vào giỏ hàng thành công');
+      this.headerComponent.getQuantityCart();
     });
   }
 

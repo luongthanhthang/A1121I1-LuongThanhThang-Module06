@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, DoCheck, OnInit} from '@angular/core';
 import {TokenStorageService} from '../../service/security/token-storage.service';
 import {Router} from '@angular/router';
 import {BookService} from '../../service/book.service';
@@ -13,7 +13,6 @@ import {CartService} from '../../service/cart.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-
   private roles: string[];
   isLoggedIn = false;
   showAdminBoard = false;
@@ -62,12 +61,18 @@ export class HeaderComponent implements OnInit {
       this.categoryList = data;
     });
   }
+
   // === giỏ hàng ===
   getQuantityCart() {
+    this.accountId = this.tokenStorageService.getUser().account.accountId;
     this.cartService.findAllCartBook(this.accountId).subscribe((data: ICartBook[]) => {
+      this.totalQuantityCart = 0;
       data.forEach((cartBook) => {
         this.totalQuantityCart += cartBook.cartId.cartQuantity;
       });
+    }, () => {
+    }, () => {
+      (document.getElementById('total-quantity-cart-id') as HTMLFormElement).innerText = this.totalQuantityCart.toString();
     });
   }
 }
