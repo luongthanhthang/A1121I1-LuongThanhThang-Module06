@@ -36,7 +36,7 @@ public class CartController {
     @Autowired
     IBookService bookService;
 
-//    @GetMapping("/list-cart")
+    //    @GetMapping("/list-cart")
 //    public ResponseEntity<List<Cart>> findAllCart(@RequestParam("accountId") Long accountId) {
 //        List<Cart> cartList = cartService.findAllCart(accountId);
 //        if (cartList.isEmpty()) {
@@ -45,6 +45,17 @@ public class CartController {
 //            return new ResponseEntity<>(cartList, HttpStatus.OK);
 //        }
 //    }
+    @GetMapping("/cart-book-detail")
+    public ResponseEntity<CartBook> findCartBookByBookId(@RequestParam("accountId") Long accountId,
+                                                         @RequestParam("bookId") Long bookId) {
+        Optional<CartBook> cartBook = cartBookService.findCartBookByBookId(accountId, bookId);
+        if (!cartBook.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(cartBook.get(), HttpStatus.OK);
+        }
+    }
+
 
     @GetMapping("/list-cart-book")
     public ResponseEntity<List<CartBook>> findAllCartBook(@RequestParam("accountId") Long accountId) {
