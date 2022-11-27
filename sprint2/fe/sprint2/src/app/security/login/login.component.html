@@ -96,11 +96,11 @@
                       <input class="form-control form-control-book" type="text" placeholder="Tài khoản đăng nhập" formControlName="username">
 
                     </div><!-- /.input-group -->
-                    <small style="color:white;">-</small>
-                    <small class="text-danger mb-0 pb-0"
-                           *ngIf="loginForm.get('username').invalid && (loginForm.get('username').touched||loginForm.get('username').dirty)">
-                      Người thực hiện không được để trống
-                    </small>
+<!--                    <small style="color:white;">-</small>-->
+<!--                    <small class="text-danger mb-0 pb-0"-->
+<!--                           *ngIf="loginForm.get('username').invalid && (loginForm.get('username').touched||loginForm.get('username').dirty)">-->
+<!--                      Người thực hiện không được để trống-->
+<!--                    </small>-->
 
 
                     <div class="row">
@@ -118,11 +118,12 @@
                         <div class="forgot-password"><a href="#">Quên mật khẩu</a></div>
                       </div><!-- /.col -->
                     </div><!-- /.row -->
-                    <small style="color:white;">-</small>
-                    <small class="text-danger mb-0 pb-0"
-                           *ngIf="loginForm.get('password').invalid && (loginForm.get('password').touched||loginForm.get('password').dirty)">
-                      Mật khẩu không được để trống
-                    </small>
+<!--                    <small style="color:white;">-</small>-->
+<!--                    <small class="text-danger mb-0 pb-0"-->
+<!--                           *ngIf="loginForm.get('password').invalid && (loginForm.get('password').touched||loginForm.get('password').dirty)">-->
+<!--                      Mật khẩu không được để trống-->
+<!--                    </small>-->
+
 
 
                     <div class="checkout-checkbox-option">
@@ -132,6 +133,7 @@
                         <span class="radio-background"><i class="icon fa fa-circle"></i></span>Ghi nhớ mật khẩu
                       </label>
                     </div><!-- /.checkout-checkbox-option -->
+                    <small class="text-danger mb-0 pb-0" style="color: red" *ngIf="errorMessage">Tài khoản hoặc mật khẩu không đúng.</small>
 
                   </div><!-- /.col -->
                   <div class="col-sm-3"></div>

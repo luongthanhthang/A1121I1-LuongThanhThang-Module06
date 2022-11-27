@@ -47,7 +47,7 @@ export class BookIntroComponent implements OnInit {
     this.findAllBookIntro();
     this.findAllBookBestSellerIntro();
     this.findAllBookBestSeller();
-    this.findAllAuthor();
+    // this.findAllAuthor();
     this.findAllCategory();
     if (!localStorage.getItem('foo')) {
       localStorage.setItem('foo', 'no reload');
@@ -87,14 +87,33 @@ export class BookIntroComponent implements OnInit {
   findAllBookBestSeller() {
     this.bookService.findAllBookBestSeller().subscribe((data: IBook[]) => {
       this.bookBestSeller = data;
+    }, () => {
+    }, () => {
+      this.authorList = [];
+      let checkAuthor = false;
+      this.bookBestSeller.forEach((bookSeller) => {
+        this.authorList.forEach((author) => {
+          if (author.authorId === bookSeller.bookAuthorId.authorId) {
+            checkAuthor = true;
+          }
+        });
+
+        if (!checkAuthor) {
+          this.authorList.push(bookSeller.bookAuthorId);
+        }
+        checkAuthor = false;
+      });
+      console.log(this.bookBestSeller);
+      console.log(1111);
+      console.log(this.authorList);
     });
   }
 
-  findAllAuthor() {
-    this.bookService.findAllAuthor().subscribe((data: IAuthor[]) => {
-      this.authorList = data;
-    });
-  }
+  // findAllAuthor() {
+  //   this.bookService.findAllAuthor().subscribe((data: IAuthor[]) => {
+  //     this.authorList = data;
+  //   });
+  // }
 
   findAllCategory() {
     this.bookService.findAllCategory().subscribe((data: ICategory[]) => {

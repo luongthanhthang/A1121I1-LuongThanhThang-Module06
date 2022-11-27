@@ -19,6 +19,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @RestController
 @CrossOrigin
@@ -143,28 +144,28 @@ public class CartController {
     @PutMapping("/payment")
     public ResponseEntity<?> paymentCart(@RequestBody List<Cart> cartListPayment) {
         List<String> cartCodeList = cartService.checkCodeCart();
-
-        // lấy mã hoá đơn
-        String cartCode = "";
+        /// list chứa 001 002 003 trong MHD-001, MHD-002, MHD-003
+        List<Integer> MHDList = new ArrayList<>();
         for (String code : cartCodeList) {
-            cartCode = code;
+            MHDList.add(Integer.parseInt(code.split("-")[1]));
         }
-        if (cartCode.equals("")) {
-            cartCode = "1";
+        // cắt chuỗi lấy mã hoá đơn
+        Random random = new Random();
+        int cartCode = random.nextInt(1000);
+        while (MHDList.contains(cartCode)) {
+            cartCode = random.nextInt(1000);
         }
 
         String cartCodePayment = "";
-        String[] cartCodeArray = cartCode.split("-");
-        System.out.println(Integer.parseInt(cartCodeArray[1]));
-        if ((Integer.parseInt(cartCodeArray[1]) + 1) < 10) {
-            cartCodePayment = "MHD-00" + (Integer.parseInt(cartCodeArray[1]) + 1);
-        } else if (Integer.parseInt(cartCodeArray[1] + 1) < 100) {
-            cartCodePayment = "MHD-0" + (Integer.parseInt(cartCodeArray[1]) + 1);
+        if (cartCode < 10) {
+            cartCodePayment = "MHD-00" + cartCode;
+        } else if (cartCode < 100) {
+            cartCodePayment = "MHD-0" + cartCode;
         } else {
-            cartCodePayment = "MHD-" + (Integer.parseInt(cartCodeArray[1]) + 1);
+            cartCodePayment = "MHD-" + cartCode;
         }
 
-        // lấy ngày hiện tại
+//         lấy ngày hiện tại
         LocalDateTime current = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String formatted = current.format(formatter);

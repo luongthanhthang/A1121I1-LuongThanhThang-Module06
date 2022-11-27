@@ -75,7 +75,9 @@
                     <h3 class="media-heading"><a style="cursor: pointer"
                                                  [routerLink]="['/book/detail', cartBook.bookId.bookId]">{{cartBook.bookId.bookName}}</a>
                     </h3>
-                    <p style="font-size: 12px; text-transform: lowercase; font-family: sans-serif">{{cartBook.bookId.bookQuantity}} sản phẩm có sẵn</p>
+                    <p
+                      style="font-size: 12px; text-transform: lowercase; font-family: sans-serif">{{cartBook.bookId.bookQuantity}}
+                      sản phẩm có sẵn</p>
                   </div>
                 </div>
               </td>
@@ -93,7 +95,7 @@
                             (click)="addBook(cartBook)"><span class="ir"></span></button>
                     <button class="arrow minus gradient" *ngIf="cartBook.cartId.cartQuantity != 1"
                             (click)="subBook(cartBook)"><span class="ir"></span></button>
-<!--                     button xoá-->
+                    <!--                     button xoá-->
                     <button class="arrow minus gradient" *ngIf="cartBook.cartId.cartQuantity == 1"
                             (click)="showInfoCartDelete(cartBook)"
                             data-toggle="modal" data-target="#modalDeleteCart"><span class="ir"></span></button>
@@ -146,8 +148,12 @@
             </div><!-- /table-responsive -->
           </div><!-- /.col -->
           <div class="col-md-12">
-            <a class="pull-right btn btn-primary btn-checkout" (click)="payment()">Tiến hành thanh toán &nbsp;<i
-              class="fa fa-chevron-right"></i></a>
+            <a *ngIf="checkShowPayment" class="pull-right btn btn-primary btn-checkout" data-toggle="modal"
+               data-target="#modalPayment" (click)="showCheckButtonPayment()">Tiến hành thanh toán &nbsp;
+              <i class="fa fa-chevron-right"></i></a>
+            <a *ngIf="!checkShowPayment" class="pull-right btn btn-primary btn-checkout"
+               (click)="showCheckButtonPayment()">Tiến hành thanh toán &nbsp;
+              <i class="fa fa-chevron-right"></i></a>
           </div>
 
         </div><!-- /.row -->
@@ -183,4 +189,28 @@
   </div>
 </div>
 
+<!-- ========ModalPayment========== -->
+<div class="modal fade" id="modalPayment" tabindex="-1" aria-labelledby="examplePayment" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h3 class="modal-title" id="examplePayment" style="font-weight: 500; color: #4b7838">Vui lòng chọn phương thức thanh toán!</h3>
+      </div>
+      <div class="modal-body">
+        <!--thanh toán paypal-->
+        <div id="myPaypalButtons"></div>
+      </div>
+      <div class="modal-footer">
+        <button style="background: gray" type="button" class="btn btn-primary-light btn-flat"
+                data-dismiss="modal">Huỷ
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 <notifier-container></notifier-container>
+
+
