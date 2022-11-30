@@ -93,7 +93,7 @@
                     <button class="arrow plus gradient"
                             [disabled]="cartBook.cartId.cartQuantity >= cartBook.bookId.bookQuantity"
                             (click)="addBook(cartBook)"><span class="ir"></span></button>
-                    <button class="arrow minus gradient" *ngIf="cartBook.cartId.cartQuantity != 1"
+                    <button class="arrow minus gradient" *ngIf="cartBook.cartId.cartQuantity != 1" [disabled]="cartBook.cartId.cartQuantity == 0"
                             (click)="subBook(cartBook)"><span class="ir"></span></button>
                     <!--                     button xoá-->
                     <button class="arrow minus gradient" *ngIf="cartBook.cartId.cartQuantity == 1"
@@ -179,7 +179,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary-light btn-flat" data-dismiss="modal"
-                (click)="deleteCart(cartDelete.cartBookId)">Xóa
+                (click)="deleteCart(cartDelete.cartId.cartId)">Xóa
         </button>
         <button style="background: gray" type="button" class="btn btn-primary-light btn-flat"
                 data-dismiss="modal">Huỷ

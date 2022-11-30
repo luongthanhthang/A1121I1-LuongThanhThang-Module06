@@ -61,6 +61,21 @@ public class CartController {
     @GetMapping("/list-cart-book")
     public ResponseEntity<List<CartBook>> findAllCartBook(@RequestParam("accountId") Long accountId) {
         List<CartBook> cartBookList = cartBookService.findAllCartBook(accountId);
+
+        // kiểm tra số lượng
+        for (CartBook cartBook : cartBookList) {
+            if (cartBook.getCartId().getCartQuantity() > cartBook.getBookId().getBookQuantity()) {
+                cartBook.getCartId().setCartQuantity(cartBook.getBookId().getBookQuantity());
+
+                // update số lượng
+                Double totalMoney = cartBook.getBookId().getBookPrice() * cartBook.getCartId().getCartQuantity()
+                        - cartBook.getBookId().getBookPrice() * cartBook.getCartId().getCartQuantity()
+                        * (cartBook.getBookId().getBookPromotionId().getPromotionPercent() / 100);
+                cartBook.getCartId().setCartTotalMoney(totalMoney);
+                cartService.updateQuantityCart(cartBook.getCartId().getCartQuantity(), cartBook.getCartId().getCartTotalMoney(), cartBook.getCartId().getCartId());
+            }
+        }
+
         if (cartBookList.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {

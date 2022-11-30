@@ -103,9 +103,6 @@ export class BookIntroComponent implements OnInit {
         }
         checkAuthor = false;
       });
-      console.log(this.bookBestSeller);
-      console.log(1111);
-      console.log(this.authorList);
     });
   }
 

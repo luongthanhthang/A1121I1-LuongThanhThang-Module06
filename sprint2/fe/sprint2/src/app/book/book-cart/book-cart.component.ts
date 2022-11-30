@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {CartService} from '../../service/cart.service';
 import {ICart} from '../../model/cart/ICart';
 import {ICartBook} from '../../model/cart/ICartBook';
@@ -187,10 +187,8 @@ export class BookCartComponent implements OnInit {
       () => {
       },
       () => {
-        this.findAllCartBook();
-        window.location.assign('/cart');
-        this.headerComponent.getQuantityCart();
         this.notification.notify('success', 'Xoá sản phẩm thành công');
+        this.ngOnInit();
       });
   }
 
@@ -233,7 +231,6 @@ export class BookCartComponent implements OnInit {
     }, () => {
       this.notification.notify('success', 'Thanh toán thành công');
       window.location.assign('/cart');
-
     });
   }
 
